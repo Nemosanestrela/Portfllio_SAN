@@ -119,6 +119,8 @@
       closing: false,
       descriptionOpen: false,
       item: null,
+      layoutWidth: 0,
+      layoutPixelRatio: 1,
       token: 0,
       animation: null,
       returnFocus: null,
@@ -425,6 +427,8 @@
       const availableWidth = Math.max(1, viewportWidth - 2 * (margin + (stacked ? 0 : infoWidth + gap)));
       // One source pixel should never be stretched across multiple screen pixels.
       const nativeScale = 1 / (window.devicePixelRatio || 1);
+      lightbox.layoutWidth = viewportWidth;
+      lightbox.layoutPixelRatio = window.devicePixelRatio || 1;
       viewer.style.setProperty('--viewer-project-width', `${availableWidth}px`);
       viewer.style.setProperty('--viewer-project-bottom', `${bottomInset + 24}px`);
       viewer.style.setProperty('--viewer-native-scale', nativeScale);
@@ -812,9 +816,17 @@
         resizeMessage();
         if (!lightbox.open) return;
         if (!lightbox.closing) {
+          const mobile = window.SanResponsiveImage.isMobile();
+          const sameMobileAlbum = mobile && lightbox.mobile && lightbox.item?.images?.length &&
+            lightbox.layoutWidth === document.documentElement.clientWidth &&
+            lightbox.layoutPixelRatio === (window.devicePixelRatio || 1);
+          // Browser bars change the height during a swipe. Keep album content anchored.
+          if (sameMobileAlbum) {
+            layoutViewerDescription();
+            return;
+          }
           ++lightbox.token;
           cancelImageAnimation();
-          const mobile = window.SanResponsiveImage.isMobile();
           if (mobile !== lightbox.mobile) {
             lightbox.mobile = mobile;
             const source = imageForViewport(lightbox.item);

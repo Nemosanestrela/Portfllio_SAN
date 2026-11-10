@@ -203,6 +203,23 @@
       const pixelRatio = window.devicePixelRatio || 1;
       if (!width || !height) return;
       if (!force && width === this.width && height === this.height && pixelRatio === this.pixelRatio) return;
+      // Mobile browser controls resize the viewport inside a screen of stable height.
+      const poolHeight = width <= 768 && window.matchMedia('(pointer: coarse)').matches
+        ? Math.max(height, window.screen.height)
+        : height;
+      const canKeepCards = !force && width <= 768 && width === this.width && pixelRatio === this.pixelRatio &&
+        (this.mode === 'grid' || Math.ceil(poolHeight / this.spacingY) + 4 === this.rows);
+      if (canKeepCards) {
+        const offsetY = (height - this.height) / 2;
+        this.height = height;
+        if (this.mode === 'free') {
+          this.camera.y += offsetY;
+          this.target.y += offsetY;
+          this.lastFrame = 0;
+          this._requestFrame();
+        }
+        return;
+      }
       this.width = width;
       this.height = height;
       this.pixelRatio = pixelRatio;
@@ -213,7 +230,7 @@
       this.spacingX = this.cardWidth + this.gapX;
       this.spacingY = this.cardHeight + this.gapY;
       this.columns = Math.ceil(width / this.spacingX) + 4;
-      this.rows = Math.ceil(height / this.spacingY) + 4;
+      this.rows = Math.ceil(poolHeight / this.spacingY) + 4;
       this.root.style.setProperty('--card-width', this.cardWidth + 'px');
       this._buildCards();
       if (this.mode === 'free') this._render(16.667, true);
@@ -240,7 +257,7 @@
       title.className = 'card-title';
       caption.append(category, title);
       button.append(media, caption);
-      const card = { button, media, image, category, title, item: null, column: null, row: null, x: 0, y: 0, vx: 0, vy: 0, width: this.cardWidth, height: this.cardHeight, scale: 1, imageVersion: 0, rotation: 0, visible: false };
+      const card = { button, media, image, category, title, item: null, source: null, requestedSource: null, column: null, row: null, x: 0, y: 0, vx: 0, vy: 0, width: this.cardWidth, height: this.cardHeight, scale: 1, imageVersion: 0, rotation: 0, visible: false };
       this.cardRecords.set(button, card);
       if (item) {
         this._setCardItem(card, item);
@@ -258,7 +275,8 @@
       card.button.dataset.category = item.category || '';
       card.button.setAttribute('aria-label', 'Ampliar ' + (item.title || item.categoryLabel || 'projeto'));
       const source = window.SanResponsiveImage.select(item);
-      if (card.image.getAttribute('src') !== source.src) this._loadCardImage(card, source.src);
+      card.source = source.src;
+      if (this.mode === 'grid') this._loadCardImage(card, source.src);
       card.image.alt = source.alt || item.title || 'Imagem do projeto';
       card.image.width = source.width || 1080;
       card.image.height = source.height || 1340;
@@ -271,6 +289,7 @@
 
     _loadCardImage(card, source) {
       const image = card.image;
+      card.requestedSource = source;
       if (this.mode === 'grid') {
         image.src = source;
         return;
@@ -375,6 +394,9 @@
     _render(delta, immediate) {
       if (!this.cards.length || !this.columns || this.mode !== 'free') return false;
       let moving = false;
+      const mobile = this.width <= 768;
+      const preloadX = this.spacingX / 2;
+      const preloadY = this.spacingY / 2;
       const startColumn = Math.floor(this.camera.x / this.spacingX) - Math.floor(this.columns / 2);
       const startRow = Math.floor(this.camera.y / this.spacingY) - Math.floor(this.rows / 2);
       for (let row = startRow; row < startRow + this.rows; row++) {
@@ -390,8 +412,8 @@
             card.column = column;
             card.row = row;
             const sizeVariation = hash(column, row, 811);
-            const featuredInitial = this.width <= 768 && column === 0 && row === 0;
-            card.scale = featuredInitial ? 1.4 : sizeVariation < 0.3 ? 0.8 : sizeVariation > 0.75 ? 1.2 : 1;
+            const featuredInitial = mobile && column === 0 && row === 0;
+            card.scale = featuredInitial ? 1.4 : sizeVariation > 0.75 ? 1.2 : !mobile && sizeVariation < 0.3 ? 0.8 : 1;
             card.width = this.cardWidth * card.scale;
             card.height = card.width * 1340 / 1080 + 42;
             card.button.style.width = card.width + 'px';
@@ -443,6 +465,13 @@
           if (Math.abs(card.rotation - desiredRotation) < 0.008) card.rotation = desiredRotation;
           moving = card.x !== x || card.y !== y || Boolean(card.vx || card.vy) || card.rotation !== desiredRotation || moving;
           const visible = card.x < this.width + 24 && card.x + card.width > -24 && card.y < this.height + 24 && card.y + card.height > -24;
+          // Recycled cells can sit far outside the viewport. Fetch only nearby artwork.
+          if (card.requestedSource !== card.source &&
+              card.x < this.width + preloadX && card.x + card.width > -preloadX &&
+              card.y < this.height + preloadY && card.y + card.height > -preloadY) {
+            card.image.fetchPriority = visible ? 'high' : 'low';
+            this._loadCardImage(card, card.source);
+          } else if (visible && !card.visible) card.image.fetchPriority = 'high';
           if (fresh || visible !== card.visible) {
             card.visible = visible;
             card.button.style.visibility = visible ? 'visible' : 'hidden';
