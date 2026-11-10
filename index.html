@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#000000">
+<title>SAN — Portfólio</title>
+<meta name="description" content="Portfólio de Rafael San. Design gráfico, identidade visual e ilustração em uma galeria para explorar.">
+<meta property="og:title" content="SAN — Portfólio">
+<meta property="og:description" content="Design gráfico, identidade visual e ilustração por Rafael San.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23000'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Arial,sans-serif' font-weight='700' font-size='44' fill='%23fff'%3ES%3C/text%3E%3C/svg%3E">
+<link rel="preload" href="assets/fonts/Anton-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="assets/fonts/Inter-Variable.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="assets/portfolio.css">
+<script src="assets/projects.js" defer></script>
+<script src="assets/site-settings.js" defer></script>
+<script src="assets/content.js" defer></script>
+<script src="assets/responsive-images.js" defer></script>
+<script src="assets/gallery.js" defer></script>
+<script src="assets/portfolio.js" defer></script>
+<script src="assets/about.js" defer></script>
+</head>
+<body>
+<div id="cursor" aria-hidden="true"></div>
+<div class="header-blur" id="headerBlur" aria-hidden="true"></div>
+<header class="site-header" id="siteHeader">
+  <a class="logo" href="#projetos" data-view="projects" aria-label="SAN — voltar aos projetos">SAN</a>
+  <nav class="desktop-nav" aria-label="Navegação principal">
+    <a href="#projetos" data-view="projects" aria-current="page"><span class="nav-label">Projetos</span></a>
+    <a href="#eu" data-view="about"><span class="nav-label">Eu</span></a>
+    <a href="#contato" data-view="contact"><span class="nav-label">Contato</span></a>
+  </nav>
+  <button class="burger" id="burgerBtn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileNav"><span></span><span></span><span></span></button>
+</header>
+<nav class="mobile-nav" id="mobileNav" aria-label="Navegação mobile" aria-hidden="true" inert>
+  <a href="#projetos" data-view="projects"><span class="nav-label">Projetos</span></a>
+  <a href="#eu" data-view="about"><span class="nav-label">Eu</span></a>
+  <a href="#contato" data-view="contact"><span class="nav-label">Contato</span></a>
+</nav>
+<div class="filter-bar gallery-tools" aria-label="Categorias de projetos">
+  <div class="filter-disclosure" id="filterDisclosure">
+    <button class="filter-toggle" id="filterToggle" type="button" aria-label="Filtrar projetos" aria-expanded="false" aria-controls="filterOptions"><span aria-hidden="true"></span><span aria-hidden="true"></span></button>
+    <div class="filter-options" id="filterOptions" aria-hidden="true" inert>
+      <div class="filters" role="group" aria-label="Filtrar por categoria">
+        <button class="filter-button" type="button" data-filter="all" aria-pressed="true">Todos</button>
+        <button class="filter-button" type="button" data-filter="brand" aria-pressed="false">Brand</button>
+        <button class="filter-button" type="button" data-filter="ecommerce" aria-pressed="false">E-commerce</button>
+        <button class="filter-button" type="button" data-filter="illustration" aria-pressed="false">Ilustração</button>
+      </div>
+    </div>
+  </div>
+</div>
+<main class="gallery-viewport" id="galleryViewport" tabindex="0" aria-label="Galeria de projetos" aria-describedby="galleryInstructions">
+  <h1 class="sr-only">Portfólio de Rafael San</h1>
+  <p class="sr-only" id="galleryInstructions">Arraste em qualquer direção para explorar. Use as setas do teclado para mover a galeria ou escolha o modo Grade. Clique em uma imagem para ampliar.</p>
+  <div class="gallery-plane" id="galleryPlane"></div>
+  <p class="gallery-empty" id="galleryEmpty" role="status" hidden>Nenhum projeto adicionado ainda.</p>
+</main>
+<p class="gallery-hint gallery-tools" id="galleryHint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M12 2v20M2 12h20m-14-6 4-4 4 4M8 18l4 4 4-4M6 8l-4 4 4 4m12-8 4 4-4 4"/></svg><span id="galleryHintText">Arraste para explorar · clique para ampliar</span></p>
+<div class="view-switch gallery-tools" role="group" aria-label="Modo de exibição">
+  <button type="button" data-gallery-mode="free" aria-pressed="true">Explorar</button><span aria-hidden="true">/</span><button type="button" data-gallery-mode="grid" aria-pressed="false">Grade</button>
+</div>
+<section class="info-panel" id="aboutPanel" aria-labelledby="aboutTitle" aria-hidden="true" hidden inert>
+  <div class="panel-inner">
+    <h2 class="sr-only" id="aboutTitle" data-panel-focus tabindex="-1">Rafael San</h2>
+    <div class="about-copy about-copy-first">
+        <p>Sou designer gráfico e ilustrador, curioso por natureza e apaixonado por tudo aquilo que envolve criatividade, expressão e novas formas de enxergar o mundo.</p>
+        <p>Gosto de explorar ideias, experimentar caminhos e encontrar novos significados. Para mim, criar é um processo de descoberta, uma maneira de traduzir pensamentos, referências e experiências em algo visual.</p>
+    </div>
+    <div class="about-photo">
+      <button class="about-marquee" id="aboutMarquee" type="button" aria-label="Mostrar ou ocultar o retrato de Rafael San" aria-expanded="false">
+        <span class="about-marquee-track" aria-hidden="true">
+          <span class="about-marquee-group"><span class="about-marquee-word">RAFAEL</span><span class="about-hover-photo"><img src="Foto_EU.png" alt="" width="1932" height="1179" loading="lazy" decoding="async"></span><strong class="about-marquee-word">SAN</strong></span>
+          <span class="about-marquee-group"><span class="about-marquee-word">RAFAEL</span><span class="about-hover-photo"><img src="Foto_EU.png" alt="" width="1932" height="1179" loading="lazy" decoding="async"></span><strong class="about-marquee-word">SAN</strong></span>
+          <span class="about-marquee-group"><span class="about-marquee-word">RAFAEL</span><span class="about-hover-photo"><img src="Foto_EU.png" alt="" width="1932" height="1179" loading="lazy" decoding="async"></span><strong class="about-marquee-word">SAN</strong></span>
+        </span>
+      </button>
+    </div>
+    <div class="about-copy about-copy-last">
+      <p>Minha trajetória sempre esteve conectada à arte, ao design e à ilustração. Entre diferentes projetos, linguagens e processos criativos, fui descobrindo novas maneiras de me expressar e ampliando meu olhar sobre o que é possível criar.</p>
+      <p>Gosto de pensar que meu trabalho é um reflexo desse percurso: <strong>uma mistura de experiências, influências e um desejo constante de continuar explorando o novo</strong>.</p>
+      <a class="panel-close about-contact-link" href="#contato" data-view="contact">Ir para contato<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</section>
+<section class="info-panel" id="contactPanel" aria-labelledby="contactTitle" aria-hidden="true" hidden inert>
+  <div class="panel-inner">
+    <div class="contact-layout">
+      <h2 class="contact-title" id="contactTitle" tabindex="-1">TEM UM PROJETO LEGAL?<br>ME MANDA UM OI!</h2>
+      <form class="contact-form" id="contactForm">
+        <div class="field-row">
+          <div class="field"><label for="cName">Nome</label><input type="text" id="cName" name="nome" autocomplete="name" required></div>
+          <div class="field"><label for="cEmail">E-mail</label><input type="email" id="cEmail" name="email" autocomplete="email" required></div>
+        </div>
+        <div class="field"><label for="cSubject">Assunto</label><input type="text" id="cSubject" name="assunto" required></div>
+        <div class="field"><label for="cMessage">Mensagem</label><textarea id="cMessage" name="mensagem" rows="1" required></textarea></div>
+        <button class="contact-submit" type="submit">Enviar</button>
+        <p class="contact-success" id="contactSuccess" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+<div class="footer-blur" id="footerBlur" aria-hidden="true"></div>
+<footer class="site-footer" id="siteFooter">
+  <span id="footerSignature">©SAN 2026</span>
+  <div><a href="https://www.instagram.com/nemosanestrela" target="_blank" rel="noopener noreferrer" data-social-link="instagram" aria-label="Instagram">IG</a><a href="#" target="_blank" rel="noopener noreferrer" data-social-link="behance" data-placeholder aria-label="Behance">BE</a></div>
+</footer>
+<div class="image-viewer" id="imageViewer" role="dialog" aria-modal="true" aria-labelledby="viewerTitle" hidden>
+  <div class="viewer-backdrop" id="viewerBackdrop"></div>
+  <div class="viewer-stage" id="viewerStage" tabindex="0" role="region" aria-label="Imagens do projeto. Role para ver as próximas imagens."><div class="viewer-project" id="viewerProject"><img class="viewer-image" id="viewerImage" src="assets/uploads/poster_2-fd5b494a-b18c-4e4a-ae54-60dd96c2e605.png" alt="" decoding="async"><div class="viewer-project-images" id="viewerProjectImages" hidden></div></div></div>
+  <div class="viewer-info" id="viewerInfo"><span class="viewer-category" id="viewerCategory"></span><h2 class="viewer-title" id="viewerTitle"></h2></div>
+  <div class="viewer-description-disclosure" id="viewerDescriptionDisclosure" hidden>
+    <button class="filter-toggle viewer-description-toggle" id="viewerDescriptionToggle" type="button" aria-label="Abrir descrição do projeto" aria-expanded="false" aria-controls="viewerDescriptionPanel"><span aria-hidden="true"></span><span aria-hidden="true"></span></button>
+    <div class="viewer-description-panel" id="viewerDescriptionPanel" role="region" aria-label="Descrição do projeto" aria-hidden="true" inert><p class="viewer-description" id="viewerDescription"></p></div>
+  </div>
+  <div class="viewer-topbar"><button class="viewer-close" id="viewerClose" type="button" aria-label="Fechar projeto">Fechar<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button></div>
+  <div class="viewer-bottom" aria-hidden="true"></div>
+</div>
+<noscript><div class="no-js-gallery"><h1>Projetos de Rafael San</h1><a href="assets/uploads/poster_2-fd5b494a-b18c-4e4a-ae54-60dd96c2e605.png"><img src="assets/uploads/poster_2-fd5b494a-b18c-4e4a-ae54-60dd96c2e605.png" alt="SG Nickel +"></a><a href="assets/gallery/01.jpg"><img src="assets/gallery/01.jpg" alt="Estudo de marca 01"></a><a href="assets/gallery/02.jpg"><img src="assets/gallery/02.jpg" alt="Estudo de marca 02"></a><a href="assets/gallery/03.jpg"><img src="assets/gallery/03.jpg" alt="Estudo de marca 03"></a><a href="assets/gallery/04.jpg"><img src="assets/gallery/04.jpg" alt="Estudo digital 01"></a><a href="assets/gallery/05.jpg"><img src="assets/gallery/05.jpg" alt="Estudo digital 02"></a><a href="assets/gallery/06.jpg"><img src="assets/gallery/06.jpg" alt="Estudo digital 03"></a><a href="assets/gallery/08.gif"><img src="assets/gallery/08.gif" alt="Estudo autoral 02"></a><a href="assets/gallery/07.jpg"><img src="assets/gallery/07.jpg" alt="Estudo autoral 01"></a><a href="assets/gallery/09.jpg"><img src="assets/gallery/09.jpg" alt="Estudo autoral 03"></a><a href="assets/uploads/banner_cocada_zero-4adf644c-53ac-48d4-ac75-3fe61b425882.png"><img src="assets/uploads/banner_cocada_zero-4adf644c-53ac-48d4-ac75-3fe61b425882.png" alt="Cocada dos Sonhos"></a><a href="assets/uploads/flyer_mockup_fom_capivara-c28415d3-de1b-493a-971b-6700d41b57f5.png"><img src="assets/uploads/flyer_mockup_fom_capivara-c28415d3-de1b-493a-971b-6700d41b57f5.png" alt="FOM"></a><a href="assets/uploads/desktop__v2_izzo-4b770e54-d69b-4696-b221-6f1be5021def.png"><img src="assets/uploads/desktop__v2_izzo-4b770e54-d69b-4696-b221-6f1be5021def.png" alt="Elixir"></a><a href="assets/uploads/storie_i-9d4b28ae-7183-4dd9-8a07-533730617d8e.png"><img src="assets/uploads/storie_i-9d4b28ae-7183-4dd9-8a07-533730617d8e.png" alt="Elixir"></a><a href="assets/uploads/poster-2-43470eb1-db40-4959-b9a8-2e0b780b237d.png"><img src="assets/uploads/poster-2-43470eb1-db40-4959-b9a8-2e0b780b237d.png" alt="Timbra"></a><a href="assets/uploads/flyer_mockup-6c2311ee-eb63-4989-bca6-25870fec4b1e.png"><img src="assets/uploads/flyer_mockup-6c2311ee-eb63-4989-bca6-25870fec4b1e.png" alt="Timbra"></a><a href="assets/uploads/cross_folded_flyer_mockup_3-142d3e20-8b58-4e54-badc-ea2657d831dc.png"><img src="assets/uploads/cross_folded_flyer_mockup_3-142d3e20-8b58-4e54-badc-ea2657d831dc.png" alt="SG"></a><a href="assets/uploads/banner_winner_15-_desktop-c0924b37-8531-456c-8e5f-5a73fff3ec28.png"><img src="assets/uploads/banner_winner_15-_desktop-c0924b37-8531-456c-8e5f-5a73fff3ec28.png" alt="IZZO / Winner"></a><a href="assets/uploads/mes-das-criancas_entrega-no-mesmo-dia_banner_des-f52e7718-a774-4c4b-ad0d-2b5fd9a99b9b.png"><img src="assets/uploads/mes-das-criancas_entrega-no-mesmo-dia_banner_des-f52e7718-a774-4c4b-ad0d-2b5fd9a99b9b.png" alt="IZZO"></a><a href="assets/uploads/mes-das-criancas_v2_banner_desktop-d0a62403-6864-40ec-be65-d836c07ba896.png"><img src="assets/uploads/mes-das-criancas_v2_banner_desktop-d0a62403-6864-40ec-be65-d836c07ba896.png" alt="IZZO"></a><a href="assets/uploads/mes-das-criancas_banner_desktop-7010f939-a3e5-45d1-9651-7ac5b68bca93.png"><img src="assets/uploads/mes-das-criancas_banner_desktop-7010f939-a3e5-45d1-9651-7ac5b68bca93.png" alt="IZZO"></a><a href="assets/uploads/banner_kidzzo_15-_desktop-633ee0e3-c204-4452-a1f3-e2b499f36ed9.png"><img src="assets/uploads/banner_kidzzo_15-_desktop-633ee0e3-c204-4452-a1f3-e2b499f36ed9.png" alt="IZZO"></a><a href="assets/uploads/banner_dunlop_palhetas_desktop-e55a4734-3817-4310-8d86-0e92bac27227.png"><img src="assets/uploads/banner_dunlop_palhetas_desktop-e55a4734-3817-4310-8d86-0e92bac27227.png" alt="IZZO / DUNLOP"></a><a href="assets/uploads/email_ernie-ball_cordas-07955d4a-76b6-407d-a466-c36b98329c49.png"><img src="assets/uploads/email_ernie-ball_cordas-07955d4a-76b6-407d-a466-c36b98329c49.png" alt="IZZO / ERNIE BALL"></a><a href="assets/uploads/capa_warner-be5c75a6-7450-4a5a-80b0-9e5dbf6318b0.png"><img src="assets/uploads/capa_warner-be5c75a6-7450-4a5a-80b0-9e5dbf6318b0.png" alt="XERYUS / WARNER"></a><a href="assets/uploads/quiksilver_v5a-e5a2af5a-5936-408b-ac8d-2a534c2ba82c.png"><img src="assets/uploads/quiksilver_v5a-e5a2af5a-5936-408b-ac8d-2a534c2ba82c.png" alt="XERYUS / QUILKSILVER"></a><a href="assets/uploads/fogo1-55c14a60-ad27-4fdb-9383-2f452122e862.jpg"><img src="assets/uploads/fogo1-55c14a60-ad27-4fdb-9383-2f452122e862.jpg" alt="Natureza"></a><a href="assets/uploads/mockup_trem_v3-3410607f-3bea-438d-869d-580c8a0df0a4.jpg"><img src="assets/uploads/mockup_trem_v3-3410607f-3bea-438d-869d-580c8a0df0a4.jpg" alt="Mockup Trem V3"></a><a href="assets/uploads/mockup_feed_v2-6ade7b58-10fb-4e54-894e-0f275b6b3b17.png"><img src="assets/uploads/mockup_feed_v2-6ade7b58-10fb-4e54-894e-0f275b6b3b17.png" alt="Mockup feed V2"></a><a href="assets/uploads/mockup_camiseta-manga-longa_sg02-1253d501-dd6a-4b0b-99cb-fa2aed0baa14.png"><img src="assets/uploads/mockup_camiseta-manga-longa_sg02-1253d501-dd6a-4b0b-99cb-fa2aed0baa14.png" alt="SG"></a></div></noscript>
+</body>
+</html>
+

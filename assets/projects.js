@@ -1,0 +1,383 @@
+window.SAN_PROJECTS = [
+  {
+    "id": "brand-01",
+    "src": "assets/gallery/01.jpg",
+    "alt": "Estudo de identidade visual 01",
+    "width": 1400,
+    "height": 1867,
+    "category": "brand",
+    "categoryLabel": "Brand",
+    "title": "Estudo de marca 01",
+    "hidden": false,
+    "images": [
+      {
+        "src": "assets/uploads/banner-kv-002d8e2d-c29c-4fba-8c70-79c779efb5bf.png",
+        "alt": "",
+        "width": 2560,
+        "height": 909
+      }
+    ]
+  },
+  {
+    "id": "brand-02",
+    "src": "assets/gallery/02.jpg",
+    "alt": "Estudo de identidade visual 02",
+    "width": 1920,
+    "height": 1280,
+    "category": "brand",
+    "categoryLabel": "Brand",
+    "title": "Estudo de marca 02",
+    "hidden": false,
+    "images": []
+  },
+  {
+    "id": "brand-03",
+    "src": "assets/gallery/03.jpg",
+    "alt": "Estudo de identidade visual 03",
+    "width": 1920,
+    "height": 1280,
+    "category": "brand",
+    "categoryLabel": "Brand",
+    "title": "Estudo de marca 03",
+    "hidden": false,
+    "images": []
+  },
+  {
+    "id": "ecommerce-01",
+    "src": "assets/gallery/04.jpg",
+    "alt": "Estudo digital 01",
+    "width": 1920,
+    "height": 1280,
+    "category": "ecommerce",
+    "categoryLabel": "E-commerce",
+    "title": "Estudo digital 01",
+    "hidden": false,
+    "images": []
+  },
+  {
+    "id": "ecommerce-02",
+    "src": "assets/gallery/05.jpg",
+    "alt": "Estudo digital 02",
+    "width": 1920,
+    "height": 1280,
+    "category": "ecommerce",
+    "categoryLabel": "E-commerce",
+    "title": "Estudo digital 02",
+    "hidden": false,
+    "images": []
+  },
+  {
+    "id": "ecommerce-03",
+    "src": "assets/gallery/06.jpg",
+    "alt": "Estudo digital 03",
+    "width": 1920,
+    "height": 1280,
+    "category": "ecommerce",
+    "categoryLabel": "E-commerce",
+    "title": "Estudo digital 03",
+    "hidden": false,
+    "images": []
+  },
+  {
+    "id": "illustration-02",
+    "src": "assets/gallery/08.gif",
+    "alt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "width": 1920,
+    "height": 1280,
+    "category": "illustration",
+    "categoryLabel": "Ilustração",
+    "title": "Estudo autoral 02",
+    "hidden": false,
+    "images": []
+  },
+  {
+    "id": "illustration-01",
+    "src": "assets/gallery/07.jpg",
+    "alt": "Estudo autoral 01",
+    "width": 1200,
+    "height": 1800,
+    "category": "illustration",
+    "categoryLabel": "Ilustração",
+    "title": "Estudo autoral 01",
+    "hidden": false,
+    "images": []
+  },
+  {
+    "id": "illustration-03",
+    "src": "assets/gallery/09.jpg",
+    "alt": "Estudo autoral 03",
+    "width": 1920,
+    "height": 1280,
+    "category": "illustration",
+    "categoryLabel": "Ilustração",
+    "title": "Estudo autoral 03",
+    "hidden": false,
+    "images": []
+  },
+  {
+    "id": "project-d4a3fde0-f969-40e7-b087-6638bc8ea9c3",
+    "src": "assets/uploads/poster_2-fd5b494a-b18c-4e4a-ae54-60dd96c2e605.png",
+    "alt": "Lançamento nova corda Nickel + SG",
+    "width": 1080,
+    "height": 1920,
+    "category": "brand",
+    "categoryLabel": "Brand",
+    "title": "SG Nickel +",
+    "hidden": false,
+    "images": [
+      {
+        "src": "assets/uploads/e-mail-e2070969-352f-482d-bec5-46350adfd931.png",
+        "alt": "",
+        "width": 700,
+        "height": 1730
+      }
+    ]
+  },
+  {
+    "id": "project-b9f7525f-42d7-4b32-843e-bba86635dfa2",
+    "src": "assets/uploads/banner_cocada_zero-4adf644c-53ac-48d4-ac75-3fe61b425882.png",
+    "alt": "Banner para sitescc",
+    "width": 2560,
+    "height": 906,
+    "category": "ecommerce",
+    "categoryLabel": "E-commerce",
+    "title": "Cocada dos Sonhos",
+    "hidden": false,
+    "images": [
+      {
+        "src": "assets/uploads/desktop-a1b2ca3f-cffc-4187-a47c-7ffd1c28f00d.png",
+        "alt": "",
+        "width": 2560,
+        "height": 906
+      }
+    ]
+  },
+  {
+    "id": "project-110daf2e-42e4-4a26-b5b9-89892c29bf9f",
+    "src": "assets/uploads/flyer_mockup_fom_capivara-c28415d3-de1b-493a-971b-6700d41b57f5.png",
+    "alt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "width": 4000,
+    "height": 3000,
+    "category": "brand",
+    "categoryLabel": "Brand",
+    "title": "FOM",
+    "hidden": false,
+    "images": []
+  },
+  {
+    "id": "project-0709f4fb-ea5c-4edb-bb33-d83dd3c53a9b",
+    "src": "assets/uploads/desktop__v2_izzo-4b770e54-d69b-4696-b221-6f1be5021def.png",
+    "alt": "Banner sitecdsvvf fdv",
+    "width": 2560,
+    "height": 906,
+    "category": "ecommerce",
+    "categoryLabel": "E-commerce",
+    "title": "Elixir",
+    "hidden": false,
+    "images": []
+  },
+  {
+    "id": "project-5fe933d8-5376-4aaa-b8ed-bb67b33088aa",
+    "src": "assets/uploads/storie_i-9d4b28ae-7183-4dd9-8a07-533730617d8e.png",
+    "alt": "Storie fsneofiuewbuiebuewbf",
+    "width": 1080,
+    "height": 1920,
+    "category": "ecommerce",
+    "categoryLabel": "E-commerce",
+    "title": "Elixir",
+    "hidden": false,
+    "images": []
+  },
+  {
+    "id": "project-084b6a2d-fda9-43fb-97ef-f8682176588a",
+    "src": "assets/uploads/poster-2-43470eb1-db40-4959-b9a8-2e0b780b237d.png",
+    "alt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    "width": 1080,
+    "height": 1920,
+    "category": "brand",
+    "categoryLabel": "Brand",
+    "title": "Timbra",
+    "hidden": false,
+    "images": []
+  },
+  {
+    "id": "project-1a08c998-5f2b-47b2-86ae-e21e4e0d188e",
+    "src": "assets/uploads/flyer_mockup-6c2311ee-eb63-4989-bca6-25870fec4b1e.png",
+    "alt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    "width": 1920,
+    "height": 1080,
+    "category": "brand",
+    "categoryLabel": "Brand",
+    "title": "Timbra",
+    "hidden": false,
+    "images": []
+  },
+  {
+    "id": "project-171565df-b3da-44c1-9eb0-815062a320df",
+    "src": "assets/uploads/cross_folded_flyer_mockup_3-142d3e20-8b58-4e54-badc-ea2657d831dc.png",
+    "alt": "Embalagem SG Nickel",
+    "width": 4000,
+    "height": 3000,
+    "category": "brand",
+    "categoryLabel": "Brand",
+    "title": "SG",
+    "hidden": false,
+    "images": []
+  },
+  {
+    "id": "project-fc02ad85-2587-41af-870d-bb3f04524b1a",
+    "src": "assets/uploads/banner_winner_15-_desktop-c0924b37-8531-456c-8e5f-5a73fff3ec28.png",
+    "alt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "width": 1920,
+    "height": 550,
+    "category": "ecommerce",
+    "categoryLabel": "E-commerce",
+    "title": "IZZO / Winner",
+    "hidden": false,
+    "images": []
+  },
+  {
+    "id": "project-20a96908-bb22-4349-a6ac-d4c1f9386c9f",
+    "src": "assets/uploads/mes-das-criancas_entrega-no-mesmo-dia_banner_des-f52e7718-a774-4c4b-ad0d-2b5fd9a99b9b.png",
+    "alt": "Mês das crianças Entrega no mesmo dia Banner Desktop",
+    "width": 1920,
+    "height": 550,
+    "category": "ecommerce",
+    "categoryLabel": "E-commerce",
+    "title": "IZZO",
+    "hidden": false,
+    "images": []
+  },
+  {
+    "id": "project-3e30709a-8afa-4692-9d2c-374aa506f64c",
+    "src": "assets/uploads/mes-das-criancas_v2_banner_desktop-d0a62403-6864-40ec-be65-d836c07ba896.png",
+    "alt": "Mês das crianças Entrega no mesmo dia Banner Desktop",
+    "width": 1920,
+    "height": 550,
+    "category": "ecommerce",
+    "categoryLabel": "E-commerce",
+    "title": "IZZO",
+    "hidden": false,
+    "images": []
+  },
+  {
+    "id": "project-c0a92956-7df7-4075-a3a4-c9410c1b5afa",
+    "src": "assets/uploads/mes-das-criancas_banner_desktop-7010f939-a3e5-45d1-9651-7ac5b68bca93.png",
+    "alt": "Mês das crianças Entrega no mesmo dia Banner Desktop",
+    "width": 1920,
+    "height": 550,
+    "category": "ecommerce",
+    "categoryLabel": "E-commerce",
+    "title": "IZZO",
+    "hidden": false,
+    "images": []
+  },
+  {
+    "id": "project-f47f7a37-42b4-4f5f-9e6f-4e9f314bd9e5",
+    "src": "assets/uploads/banner_kidzzo_15-_desktop-633ee0e3-c204-4452-a1f3-e2b499f36ed9.png",
+    "alt": "Mês das crianças Entrega no mesmo dia Banner Desktop",
+    "width": 1920,
+    "height": 550,
+    "category": "ecommerce",
+    "categoryLabel": "E-commerce",
+    "title": "IZZO",
+    "hidden": false,
+    "images": []
+  },
+  {
+    "id": "project-505c6f7b-6078-43d2-8b5f-b4047490f186",
+    "src": "assets/uploads/banner_dunlop_palhetas_desktop-e55a4734-3817-4310-8d86-0e92bac27227.png",
+    "alt": "Palhetas DUNLOP",
+    "width": 1920,
+    "height": 550,
+    "category": "ecommerce",
+    "categoryLabel": "E-commerce",
+    "title": "IZZO / DUNLOP",
+    "hidden": false,
+    "images": []
+  },
+  {
+    "id": "project-119d02d0-b033-484c-a0db-2ddf029187b9",
+    "src": "assets/uploads/email_ernie-ball_cordas-07955d4a-76b6-407d-a466-c36b98329c49.png",
+    "alt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "width": 720,
+    "height": 2782,
+    "category": "ecommerce",
+    "categoryLabel": "E-commerce",
+    "title": "IZZO / ERNIE BALL",
+    "hidden": false,
+    "images": []
+  },
+  {
+    "id": "project-99214a2c-dcfc-41a0-bc4c-10b91ead6d75",
+    "src": "assets/uploads/capa_warner-be5c75a6-7450-4a5a-80b0-9e5dbf6318b0.png",
+    "alt": "XERYUS / WARNER",
+    "width": 1920,
+    "height": 1080,
+    "category": "brand",
+    "categoryLabel": "Brand",
+    "title": "XERYUS / WARNER",
+    "hidden": false,
+    "images": []
+  },
+  {
+    "id": "project-8621e0e7-f4b0-4e6a-9fbc-1ec3aef8cf59",
+    "src": "assets/uploads/quiksilver_v5a-e5a2af5a-5936-408b-ac8d-2a534c2ba82c.png",
+    "alt": "XERYUS / QUILKSILVER",
+    "width": 1080,
+    "height": 1350,
+    "category": "ecommerce",
+    "categoryLabel": "E-commerce",
+    "title": "XERYUS / QUILKSILVER",
+    "hidden": false,
+    "images": []
+  },
+  {
+    "id": "project-758384df-60f7-47a6-b1db-84509312af41",
+    "src": "assets/uploads/fogo1-55c14a60-ad27-4fdb-9383-2f452122e862.jpg",
+    "alt": "Autoral",
+    "width": 957,
+    "height": 1418,
+    "category": "illustration",
+    "categoryLabel": "Ilustração",
+    "title": "Natureza",
+    "hidden": false,
+    "images": []
+  },
+  {
+    "id": "project-28d92337-91a7-41ba-90f9-1206ace3b7c0",
+    "src": "assets/uploads/mockup_trem_v3-3410607f-3bea-438d-869d-580c8a0df0a4.jpg",
+    "alt": "Mockup Trem V3",
+    "width": 4500,
+    "height": 3000,
+    "category": "brand",
+    "categoryLabel": "Brand",
+    "title": "Mockup Trem V3",
+    "hidden": false,
+    "images": []
+  },
+  {
+    "id": "project-b9c6531a-05aa-480e-8a11-dbff308ba542",
+    "src": "assets/uploads/mockup_feed_v2-6ade7b58-10fb-4e54-894e-0f275b6b3b17.png",
+    "alt": "Mockup feed V2",
+    "width": 1920,
+    "height": 1080,
+    "category": "brand",
+    "categoryLabel": "Brand",
+    "title": "Mockup feed V2",
+    "hidden": false,
+    "images": []
+  },
+  {
+    "id": "project-56d84390-50ca-4a47-b48f-5d72d5eac3cd",
+    "src": "assets/uploads/mockup_camiseta-manga-longa_sg02-1253d501-dd6a-4b0b-99cb-fa2aed0baa14.png",
+    "alt": "Linkedin",
+    "width": 2000,
+    "height": 1333,
+    "category": "brand",
+    "categoryLabel": "Brand",
+    "title": "SG",
+    "hidden": false,
+    "images": []
+  }
+];
