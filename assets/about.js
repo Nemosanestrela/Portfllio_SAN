@@ -11,8 +11,19 @@
     if (!groups.length) return;
 
     const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const mobileLayout = window.matchMedia('(max-width: 768px)');
     const slots = new Map(groups.map((group) => [group, group.querySelector('.about-hover-photo')]));
     if (Array.from(slots.values()).some((slot) => !slot)) return;
+    const portraitSource = slots.get(groups[0]).querySelector('img');
+    if (!portraitSource) return;
+    const portrait = portraitSource.cloneNode();
+    if (!portrait.alt.trim()) {
+      const name = document.getElementById('aboutTitle')?.textContent.trim();
+      portrait.alt = name ? `Retrato de ${name}` : 'Retrato';
+    }
+    portrait.className = 'about-mobile-portrait';
+    portrait.setAttribute('aria-hidden', 'true');
+    marquee.after(portrait);
 
     let loopWidth = 0;
     let offset = 0;
@@ -68,6 +79,7 @@
     }
 
     function setOpen(open, group) {
+      if (mobileLayout.matches) return;
       if (open && !active) return;
       if (open) {
         if (!activeGroup) activeGroup = group || centeredGroup();
@@ -99,14 +111,31 @@
       speed = 0;
       settledFrames = 0;
       marquee.classList.remove('is-open');
-      marquee.setAttribute('aria-expanded', 'false');
+      if (mobileLayout.matches) marquee.removeAttribute('aria-expanded');
+      else marquee.setAttribute('aria-expanded', 'false');
       offset = wrap(offset);
       setTransform();
+    }
+
+    function updatePortrait(visible) {
+      if (!mobileLayout.matches || panel.hidden || panel.getAttribute('aria-hidden') === 'true' || panel.scrollTop <= 1) {
+        portrait.classList.remove('is-visible');
+        portrait.setAttribute('aria-hidden', 'true');
+        return;
+      }
+      if (!visible || !portrait.complete || !portrait.naturalWidth || portrait.classList.contains('is-visible')) return;
+      const rect = marquee.getBoundingClientRect();
+      const panelRect = panel.getBoundingClientRect();
+      const midpoint = (Math.max(0, panelRect.top) + Math.min(window.innerHeight, panelRect.bottom)) / 2;
+      if (rect.top + rect.height / 2 > midpoint) return;
+      portrait.classList.add('is-visible');
+      portrait.removeAttribute('aria-hidden');
     }
 
     function updateVisibility() {
       if (destroyed) return;
       const visible = isVisible();
+      updatePortrait(visible);
       if (visible === active) return;
       active = visible;
       lastTime = 0;
@@ -208,6 +237,18 @@
       updateMetrics();
     }
 
+    function onLayoutChange() {
+      resetInteraction();
+      if (mobileLayout.matches) {
+        marquee.tabIndex = -1;
+        marquee.setAttribute('aria-hidden', 'true');
+      } else {
+        marquee.removeAttribute('tabindex');
+        marquee.removeAttribute('aria-hidden');
+      }
+      onResize();
+    }
+
     function onMotionChange() {
       speed = 0;
       lastTime = 0;
@@ -226,6 +267,8 @@
     window.addEventListener('resize', onResize);
     panel.addEventListener('scroll', updateVisibility, { passive: true });
     motionPreference.addEventListener('change', onMotionChange);
+    mobileLayout.addEventListener('change', onLayoutChange);
+    portrait.addEventListener('load', updateVisibility);
 
     const mutationObserver = new MutationObserver(updateVisibility);
     mutationObserver.observe(panel, { attributes: true, attributeFilter: ['hidden', 'inert', 'class', 'aria-hidden'] });
@@ -260,24 +303,29 @@
         window.removeEventListener('resize', onResize);
         panel.removeEventListener('scroll', updateVisibility);
         motionPreference.removeEventListener('change', onMotionChange);
+        mobileLayout.removeEventListener('change', onLayoutChange);
+        portrait.removeEventListener('load', updateVisibility);
+        portrait.remove();
         resetInteraction();
+        marquee.removeAttribute('tabindex');
+        marquee.removeAttribute('aria-hidden');
+        marquee.setAttribute('aria-expanded', 'false');
         track.style.removeProperty('transform');
         delete window.sanAboutMarquee;
       }
     };
 
-    updateMetrics();
-    updateVisibility();
+    onLayoutChange();
   }
 
-  function getPhraseRange(paragraph, phrase) {
+  function getPhraseRange(paragraph, phrase, ignoreCase = false) {
     const text = paragraph.textContent;
-    let start = text.indexOf(phrase);
+    let start = ignoreCase ? -1 : text.indexOf(phrase);
     let end = start + phrase.length;
     if (start < 0) {
       const words = phrase.trim().split(/\s+/);
       const pattern = words.map((word) => word.replace(/[.*+?^$(){}|[\]\\]/g, '\\$&')).join('\\s+');
-      const match = new RegExp(pattern).exec(text);
+      const match = new RegExp(pattern, ignoreCase ? 'i' : '').exec(text);
       if (!match || !match[0]) return null;
       start = match.index;
       end = start + match[0].length;
@@ -297,24 +345,40 @@
     return null;
   }
 
-  function drawPhraseUnderline(paragraph, range, animated) {
+  function drawPhraseUnderline(paragraph, range, animated, isContactHeading) {
     const origin = paragraph.getBoundingClientRect();
-    const lineHeight = parseFloat(getComputedStyle(paragraph).lineHeight);
+    const style = getComputedStyle(paragraph);
+    const lineHeight = parseFloat(style.lineHeight);
+    let fontBoxHeight;
+    let inkOffset;
+    if (isContactHeading) {
+      const context = document.createElement('canvas').getContext('2d');
+      if (context) {
+        context.font = `${style.fontStyle} ${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
+        const metrics = context.measureText(range.toString());
+        const gap = Math.max(3, Math.round(parseFloat(style.fontSize) * 0.06));
+        fontBoxHeight = metrics.fontBoundingBoxAscent + metrics.fontBoundingBoxDescent;
+        inkOffset = metrics.actualBoundingBoxDescent - metrics.fontBoundingBoxDescent + gap;
+      }
+    }
     const rows = new Map();
     for (const rect of range.getClientRects()) {
       if (!rect.width) continue;
       const row = Math.floor((rect.top + rect.height / 2 - origin.top) / lineHeight);
       const segment = rows.get(row);
+      // Text ranges include the font's full descent, even when the phrase uses none of it.
+      const hasMatchingMetrics = Number.isFinite(inkOffset) && Math.abs(rect.height - fontBoxHeight) < 2;
+      const bottom = rect.bottom + (hasMatchingMetrics ? inkOffset : 1);
       rows.set(row, {
         left: Math.min(segment?.left ?? rect.left, rect.left),
         right: Math.max(segment?.right ?? rect.right, rect.right),
-        bottom: Math.max(segment?.bottom ?? rect.bottom, rect.bottom),
+        bottom: Math.max(segment?.bottom ?? bottom, bottom),
       });
     }
 
     const segments = Array.from(rows.entries()).sort(([a], [b]) => a - b).map(([, segment]) => segment);
     const totalWidth = segments.reduce((width, segment) => width + segment.right - segment.left, 0);
-    let delay = 0;
+    let delay = isContactHeading ? 240 : 0;
     for (const { left, right, bottom } of segments) {
       const width = right - left;
       const duration = 1050 * width / totalWidth;
@@ -324,7 +388,7 @@
       stroke.setAttribute('aria-hidden', 'true');
       Object.assign(stroke.style, {
         left: `${left - origin.left}px`,
-        top: `${bottom - origin.top + 1}px`,
+        top: `${bottom - origin.top}px`,
         width: `${width}px`,
       });
       stroke.style.setProperty('--underline-delay', `${delay}ms`);
@@ -332,6 +396,7 @@
       paragraph.append(stroke);
       delay += duration;
     }
+    return delay;
   }
 
   function initCopyReveal({ panelId, selector, family, controller, revealScale, phrases = [] }) {
@@ -340,6 +405,8 @@
     const blocks = Array.from(panel.querySelectorAll(selector));
     if (!blocks.length) return;
     const firstBlock = blocks[0];
+    const roles = panel.querySelector('.about-roles');
+    const rolesBelowLastBlock = roles && window.matchMedia('(max-width: 768px)');
     panel.style.setProperty('--copy-reveal-duration', Math.round(700 * revealScale) + 'ms');
 
     const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -358,7 +425,9 @@
     let firstRevealFrame = 0;
     let destroyed = false;
     let nextMaskId = 0;
+    let rolesTimer = 0;
     const lineReveals = new Map();
+    const rolesReadyTimes = new Map();
     const svgElement = (tag) => document.createElementNS('http://www.w3.org/2000/svg', tag);
 
     const isVisitOpen = () => !panel.hidden && panel.getAttribute('aria-hidden') !== 'true' &&
@@ -366,16 +435,46 @@
     const canReveal = () => visitOpen && !panel.inert && !document.hidden &&
       !document.body.classList.contains('menu-is-open');
 
-    function drawUnderline(block, animated) {
-      const phrase = phrases[blocks.indexOf(block)];
-      if (!phrase || !visitOpen || !block.classList.contains('is-copy-visible')) return;
-      block.querySelectorAll('.about-underline').forEach((stroke) => stroke.remove());
-      for (const paragraph of block.querySelectorAll('p')) {
-        const range = getPhraseRange(paragraph, phrase);
-        if (!range) continue;
-        drawPhraseUnderline(paragraph, range, animated);
-        break;
+    function syncRoles() {
+      if (!roles || !visitOpen || roles.classList.contains('is-roles-visible')) return;
+      clearTimeout(rolesTimer);
+      const source = rolesBelowLastBlock.matches ? blocks.at(-1) : firstBlock;
+      const readyAt = rolesReadyTimes.get(source);
+      if (readyAt === undefined) return;
+      if (!motionPreference.matches) {
+        const remaining = readyAt - performance.now();
+        if (remaining > 0) {
+          rolesTimer = setTimeout(syncRoles, Math.ceil(remaining));
+          return;
+        }
+        if (rolesBelowLastBlock.matches) {
+          const bounds = roles.getBoundingClientRect();
+          if (bounds.bottom <= 0 || bounds.top >= window.innerHeight) return;
+        }
       }
+      roles.classList.add('is-roles-visible');
+    }
+
+    function drawUnderline(block, animated) {
+      if (!visitOpen || !block.classList.contains('is-copy-visible')) return;
+      const phrase = phrases[blocks.indexOf(block)];
+      block.querySelectorAll('.about-underline').forEach((stroke) => stroke.remove());
+      let underlineDuration = 0;
+      if (phrase) {
+        const isContactHeading = block.matches('.contact-title');
+        const textElements = isContactHeading ? [block] : block.querySelectorAll('p');
+        for (const paragraph of textElements) {
+          const range = getPhraseRange(paragraph, phrase, isContactHeading);
+          if (!range) continue;
+          underlineDuration = drawPhraseUnderline(paragraph, range, animated, isContactHeading);
+          break;
+        }
+      }
+      if (roles && (animated || !rolesReadyTimes.has(block))) {
+        const delay = animated ? underlineDuration + 260 : 260;
+        rolesReadyTimes.set(block, performance.now() + delay);
+      }
+      syncRoles();
     }
 
     function refreshUnderlines() {
@@ -466,6 +565,9 @@
     function resetVisit() {
       cancelAnimationFrame(firstRevealFrame);
       firstRevealFrame = 0;
+      clearTimeout(rolesTimer);
+      rolesReadyTimes.clear();
+      roles?.classList.remove('is-roles-visible');
       clearLineReveals();
       hasScrolled = false;
       lastScrollTop = panel.scrollTop;
@@ -555,8 +657,12 @@
     const mutationObserver = new MutationObserver(syncVisit);
     mutationObserver.observe(panel, { attributes: true, attributeFilter: ['hidden', 'aria-hidden', 'class', 'inert'] });
     mutationObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
-    const intersectionObserver = new IntersectionObserver(revealVisibleCopies, { root: panel, threshold: [0, 0.01, 1] });
+    const intersectionObserver = new IntersectionObserver(() => {
+      revealVisibleCopies();
+      syncRoles();
+    }, { root: panel, threshold: [0, 0.01, 1] });
     blocks.forEach((block) => intersectionObserver.observe(block));
+    if (roles) intersectionObserver.observe(roles);
 
     window[controller] = {
       refresh: syncVisit,
@@ -565,8 +671,7 @@
       destroy() {
         destroyed = true;
         clearTimeout(fontTimer);
-        cancelAnimationFrame(firstRevealFrame);
-        clearLineReveals();
+        resetVisit();
         mutationObserver.disconnect();
         intersectionObserver.disconnect();
         panel.removeEventListener('scroll', onScroll);
@@ -576,10 +681,6 @@
         motionPreference.removeEventListener('change', onMotionChange);
         panel.classList.remove('has-copy-reveal');
         panel.style.removeProperty('--copy-reveal-duration');
-        blocks.forEach((block) => {
-          block.classList.remove('is-copy-visible');
-          block.querySelectorAll('.about-underline').forEach((stroke) => stroke.remove());
-        });
         delete window[controller];
       }
     };
@@ -626,6 +727,7 @@
       family: siteSettings?.fontFamily?.(site?.contactFont, site?.fontLibrary) || 'Anton',
       controller: 'sanContactTitleReveal',
       revealScale,
+      phrases: ['me manda um oi'],
     });
   }
 

@@ -105,8 +105,9 @@
     const viewerCategory = $('#viewerCategory');
     let viewerDescriptionHideTimer = 0;
     const imageForViewport = window.SanResponsiveImage.select;
-    const viewerTiming = { open: 500, detailsOut: 160, close: 400 };
-    viewer.style.setProperty('--viewer-cover-duration', `${viewerTiming.open}ms`);
+    const viewerTiming = { open: 500, mobileOpen: 650, detailsOut: 160, close: 400 };
+    const viewerMotion = 'cubic-bezier(.3,0,.2,1)';
+    const mobileViewerOpenMotion = 'cubic-bezier(.35,.05,.25,1)';
     viewer.style.setProperty('--viewer-details-out-duration', `${viewerTiming.detailsOut}ms`);
     viewer.style.setProperty('--viewer-return-duration', `${viewerTiming.close}ms`);
     // Keep the description attached to its fixed toggle while the album scrolls.
@@ -391,6 +392,9 @@
       if (document.documentElement.clientWidth <= 768) viewerProject.prepend(viewerInfo);
       else viewerStage.after(viewerInfo);
     }
+    function isMobileViewer() {
+      return document.documentElement.clientWidth <= 768;
+    }
     function layoutViewerDescription() {
       if (!viewerDescriptionPanel || !lightbox.descriptionOpen) return;
       const button = viewerDescriptionToggle.getBoundingClientRect();
@@ -399,6 +403,15 @@
       const small = document.documentElement.clientWidth <= 768;
       const gap = small ? 12 : 16;
       const safeTop = Math.max(24, close.bottom + 24);
+      if (isMobileViewer()) {
+        const width = viewerDescriptionPanel.offsetWidth;
+        viewerDescriptionPanel.style.maxHeight = `${Math.max(44, button.top - gap - safeTop)}px`;
+        viewerDescriptionPanel.style.right = 'auto';
+        viewerDescriptionPanel.style.left = `${(document.documentElement.clientWidth - width) / 2 - disclosure.left}px`;
+        viewerDescriptionPanel.style.top = `${button.top - gap - viewerDescriptionPanel.offsetHeight - disclosure.top}px`;
+        return;
+      }
+      viewerDescriptionPanel.style.left = '';
       const controlsTop = viewerBottom.getBoundingClientRect().top;
       const availableHeight = Math.max(0, controlsTop - 24 - safeTop);
       viewerDescriptionPanel.style.maxHeight = `${Math.max(60, availableHeight)}px`;
@@ -419,7 +432,10 @@
       viewer.style.setProperty('--viewer-info-width', `${infoWidth}px`);
       const topInset = Math.max(margin, viewerClose.getBoundingClientRect().bottom + 24);
       viewer.style.setProperty('--viewer-info-top', `${topInset}px`);
+      // Keep the cover frame based on the original title metrics.
+      viewer.classList.remove('has-large-title');
       const infoHeight = viewerInfo ? viewerInfo.getBoundingClientRect().height : 0;
+      viewer.classList.toggle('has-large-title', stacked);
       const imageTopLimit = topInset + (stacked ? infoHeight + gap : 0);
       const controlsTop = viewerBottom ? viewerBottom.getBoundingClientRect().top : innerHeight - margin - 36;
       const verticalGap = stacked ? 28 : 24;
@@ -458,6 +474,18 @@
     function frameStyles(rect, radius = 12) {
       return { left: `${rect.left}px`, top: `${rect.top}px`, width: `${rect.width}px`, height: `${rect.height}px`, borderRadius: `${radius}px` };
     }
+    function mobileOpeningFrame(source, destination, radius) {
+      // Scale the full image uniformly and reveal what the gallery card cropped.
+      const scale = Math.max(source.width / destination.width, source.height / destination.height);
+      const x = source.left + source.width / 2 - (destination.left + destination.width / 2);
+      const y = source.top + source.height / 2 - (destination.top + destination.height / 2);
+      const insetX = Math.max(0, (destination.width - source.width / scale) / 2);
+      const insetY = Math.max(0, (destination.height - source.height / scale) / 2);
+      return {
+        transform: `translate(${x}px, ${y}px) scale(${scale})`,
+        clipPath: `inset(${insetY}px ${insetX}px round ${radius / scale}px)`
+      };
+    }
     function cancelImageAnimation() {
       if (lightbox.animation) lightbox.animation.cancel();
       lightbox.animation = null;
@@ -468,13 +496,13 @@
         viewerStage.scrollTop = 0;
         viewerStage.scrollLeft = 0;
       }
-      Object.assign(viewerImage.style, { position: 'absolute', display: 'block', margin: '0', maxWidth: 'none', maxHeight: 'none', objectFit: 'cover', pointerEvents: 'auto', opacity: '1', filter: 'brightness(1)' });
+      Object.assign(viewerImage.style, { position: 'absolute', display: 'block', margin: '0', maxWidth: 'none', maxHeight: 'none', objectFit: 'cover', pointerEvents: 'auto', opacity: '1', filter: 'brightness(1)', clipPath: 'none' });
     }
-    function animateImage(from, to, duration = viewerTiming.open) {
+    function animateImage(from, to, duration = viewerTiming.open, easing = viewerMotion) {
       cancelImageAnimation();
       Object.assign(viewerImage.style, to);
       if (reducedMotion.matches || typeof viewerImage.animate !== 'function') return Promise.resolve();
-      const animation = viewerImage.animate([from, to], { duration, easing: 'cubic-bezier(.3,0,.2,1)', fill: 'both' });
+      const animation = viewerImage.animate([from, to], { duration, easing, fill: 'both' });
       lightbox.animation = animation;
       return animation.finished.catch(() => {}).then(() => {
         if (lightbox.animation === animation) {
@@ -582,25 +610,41 @@
       viewer.setAttribute('aria-hidden', 'false');
       body.classList.add('lightbox-is-open');
       setViewerImage(item);
-      const destination = frameStyles(fittedRect());
+      const mobileViewer = isMobileViewer();
+      const duration = mobileViewer ? viewerTiming.mobileOpen : viewerTiming.open;
+      const easing = mobileViewer ? mobileViewerOpenMotion : viewerMotion;
+      viewer.style.setProperty('--viewer-cover-duration', `${duration}ms`);
+      const fitted = fittedRect();
+      const destination = { ...frameStyles(fitted), opacity: '1', transform: 'none', filter: 'brightness(1)' };
       const card = lightbox.origin;
-      const from = cardIsVisible(card) ? { ...frameStyles(card.rect, card.radius ?? 24), filter: getComputedStyle(card.image).filter, opacity: '1', transform: 'none' } : { ...destination, filter: 'brightness(1)', opacity: '0', transform: 'scale(.97)' };
+      let from = { ...destination, opacity: '0', transform: 'scale(.97)' };
+      if (cardIsVisible(card)) {
+        const radius = card.radius ?? 24;
+        const filter = getComputedStyle(card.image).filter;
+        if (mobileViewer) {
+          destination.clipPath = 'inset(0px round 12px)';
+          from = { ...destination, ...mobileOpeningFrame(card.rect, fitted, radius), filter };
+        } else {
+          from = { ...destination, ...frameStyles(card.rect, radius), filter };
+        }
+      }
       concealSource(card);
       syncGalleryAvailability();
       void viewer.offsetWidth;
       viewer.classList.add('is-open');
-      animateImage(from, { ...destination, opacity: '1', transform: 'none', filter: 'brightness(1)' });
+      const opening = animateImage(from, destination, duration, easing);
       requestAnimationFrame(() => {
         if (lightbox.open && !lightbox.closing && token === lightbox.token) focusWithoutScroll(viewerClose);
       });
       // Cached images have dimensions immediately; an uncached image can refine the fit once decoded.
       const displayedImage = imageForViewport(item);
       if (!displayedImage.width || !displayedImage.height) {
-        const onLoad = () => {
+        const refineFit = () => {
           if (token !== lightbox.token || !lightbox.open || lightbox.closing) return;
           const rect = viewerImage.getBoundingClientRect();
           animateImage(frameStyles(rect), frameStyles(fittedRect()), 300);
         };
+        const onLoad = () => mobileViewer ? opening.then(refineFit) : refineFit();
         if (viewerImage.complete && viewerImage.naturalWidth) onLoad();
         else viewerImage.addEventListener('load', onLoad, { once: true });
       }
@@ -647,13 +691,20 @@
       viewer.classList.add('is-closing');
       // Hold the cover in place while the extra images leave first.
       const scrollTop = viewerStage.scrollTop;
-      Object.assign(viewerImage.style, frameStyles({ left: current.left, top: current.top + scrollTop, width: current.width, height: current.height }, currentRadius), { opacity: '1', transform: 'none', filter: currentFilter });
+      Object.assign(viewerImage.style, frameStyles({ left: current.left, top: current.top + scrollTop, width: current.width, height: current.height }, currentRadius), { opacity: '1', transform: 'none', filter: currentFilter, clipPath: 'none' });
       const returnToGallery = () => {
         if (token !== lightbox.token || !lightbox.closing) return;
         if (scrollTop > 1) {
           // Fade in place instead of jumping back to the cover at the top of the album.
+          const sourceImage = lightbox.sourceImage;
           restoreSource();
-          const animation = viewer.animate([{ opacity: 1 }, { opacity: 0 }], { duration: viewerTiming.close, easing: 'cubic-bezier(.3,0,.2,1)', fill: 'both' });
+          if (isMobileViewer() && sourceImage?.isConnected) {
+            sourceImage.animate([{ filter: currentFilter }, { filter: getComputedStyle(sourceImage).filter }], {
+              duration: viewerTiming.close,
+              easing: viewerMotion
+            });
+          }
+          const animation = viewer.animate([{ opacity: 1 }, { opacity: 0 }], { duration: viewerTiming.close, easing: viewerMotion, fill: 'both' });
           lightbox.animation = animation;
           animation.finished.catch(() => {}).then(() => {
             if (token === lightbox.token && lightbox.closing) finishViewerClose(restoreFocus);
