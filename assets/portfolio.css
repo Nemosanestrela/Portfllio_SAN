@@ -274,7 +274,7 @@ body:not(.is-ready) .gallery-tools.view-switch{transform:translate(-50%,18px)}
     grid-template-columns:repeat(2,minmax(0,var(--mobile-grid-card-width)));
     gap:24px 20px;
     align-items:start;
-    padding:var(--mobile-grid-top) var(--gutter) calc(var(--mobile-footer-height) + 76px);
+    padding:var(--mobile-grid-top) var(--gutter) var(--mobile-grid-bottom-padding,calc(var(--mobile-footer-height) + 76px));
   }
   .is-grid .gallery-card{min-width:0;align-self:start}
   .is-grid .gallery-card-caption{min-width:0;padding-top:8px}

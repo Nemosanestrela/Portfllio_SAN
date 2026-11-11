@@ -180,6 +180,8 @@
       this.root.classList.remove('is-grid', 'is-dragging');
       this.root.style.touchAction = this.originalTouchAction;
       this.root.style.removeProperty('--card-width');
+      this.plane.style.removeProperty('--mobile-grid-card-width');
+      this.plane.style.removeProperty('--mobile-grid-bottom-padding');
       if (!this.hadTabIndex) this.root.removeAttribute('tabindex');
       this.plane.replaceChildren();
       this.cards = [];
@@ -233,8 +235,23 @@
       this.rows = Math.ceil(poolHeight / this.spacingY) + 4;
       this.root.style.setProperty('--card-width', this.cardWidth + 'px');
       this._buildCards();
+      this._measureGridGeometry();
       if (this.mode === 'free') this._render(16.667, true);
       this._requestFrame();
+    }
+
+    _measureGridGeometry() {
+      this.plane.style.removeProperty('--mobile-grid-card-width');
+      this.plane.style.removeProperty('--mobile-grid-bottom-padding');
+      if (this.mode !== 'grid' || !window.SanResponsiveImage.isMobile()) return;
+
+      // Keep the fitted grid stable while the browser bars or safe area resize.
+      const style = getComputedStyle(this.plane);
+      const [columnWidth] = style.gridTemplateColumns.split(' ');
+      if (!columnWidth.endsWith('px')) return;
+      const bottomPadding = style.paddingBottom;
+      this.plane.style.setProperty('--mobile-grid-card-width', columnWidth);
+      this.plane.style.setProperty('--mobile-grid-bottom-padding', bottomPadding);
     }
 
     _makeCard(item) {

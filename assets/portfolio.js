@@ -868,11 +868,11 @@
         if (!lightbox.open) return;
         if (!lightbox.closing) {
           const mobile = window.SanResponsiveImage.isMobile();
-          const sameMobileAlbum = mobile && lightbox.mobile && lightbox.item?.images?.length &&
+          const sameMobileLayout = mobile && lightbox.mobile &&
             lightbox.layoutWidth === document.documentElement.clientWidth &&
             lightbox.layoutPixelRatio === (window.devicePixelRatio || 1);
-          // Browser bars change the height during a swipe. Keep album content anchored.
-          if (sameMobileAlbum) {
+          // Keep the cover and album content anchored as browser bars resize.
+          if (sameMobileLayout) {
             layoutViewerDescription();
             return;
           }
