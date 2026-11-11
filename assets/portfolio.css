@@ -112,8 +112,21 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
 .has-copy-reveal :is(.about-copy,.contact-title){opacity:0;transform:translateY(16px);transition:opacity var(--copy-reveal-duration,.7s) ease,transform var(--copy-reveal-duration,.7s) cubic-bezier(.22,1,.36,1)}
 .has-copy-reveal :is(.about-copy,.contact-title).is-copy-visible{opacity:1;transform:none}
 .about-roles{margin:0;padding:0;list-style:none;color:var(--accent);font-size:clamp(17px,1.32vw,20px);line-height:1.8;text-align:left}
-.has-copy-reveal .about-roles.is-roles-visible{transition:opacity .55s ease,transform .55s cubic-bezier(.22,1,.36,1)}
-.has-copy-reveal .about-roles:not(.is-roles-visible){opacity:0;transform:translateY(12px)}
+.about-roles>li{overflow:hidden}
+.about-roles>li>span{display:block}
+@media(prefers-reduced-motion:no-preference){
+  .about-roles{--role-roll-duration:.46s}
+  .about-roles>li:nth-child(2){--role-roll-delay:var(--role-roll-duration)}
+  .about-roles>li:nth-child(3){--role-roll-delay:calc(2 * var(--role-roll-duration))}
+  .has-copy-reveal .about-roles:not(.is-roles-visible)>li>span{transform:translateY(100%)}
+  .has-copy-reveal .about-roles.is-roles-visible>li>span{
+    animation:roll-about-role var(--role-roll-duration) cubic-bezier(.35,0,.28,1) var(--role-roll-delay,0s) both;
+  }
+}
+@keyframes roll-about-role{
+  from{transform:translateY(100%)}
+  to{transform:translateY(0)}
+}
 @media(min-width:769px){
   #aboutPanel .panel-inner{position:relative}
   .about-roles{position:absolute;top:var(--panel-top);right:calc(var(--gutter) + var(--about-copy-inset))}
@@ -152,7 +165,10 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
     transition:clip-path .72s cubic-bezier(.22,1,.36,1);
     pointer-events:none
   }
-  .about-mobile-portrait.is-visible{clip-path:inset(0 round var(--radius))}
+  .about-mobile-portrait.is-visible{
+    clip-path:inset(0 round var(--radius));
+    transition-timing-function:cubic-bezier(.48,.05,.78,1)
+  }
 }
 #contactPanel .panel-inner{max-width:calc(720px + 2*var(--gutter));min-height:100%;display:flex;flex-direction:column;justify-content:center}
 .contact-layout{display:flex;flex-direction:column;gap:clamp(72px,7vw,112px);width:100%;align-items:stretch}
@@ -301,7 +317,15 @@ body:not(.is-ready) .gallery-tools.view-switch{transform:translate(-50%,18px)}
 @media(max-width:768px) and (hover:none){
   .gallery-viewport .gallery-card:hover:not(:focus-visible) img{filter:brightness(.7)}
 }
-@media(max-width:768px){#aboutPanel .panel-inner{--about-copy-inset:clamp(12px,3.5vw,20px);--about-copy-width:calc((100% - 2*var(--about-copy-inset)) * .9)}.about-copy-first,.about-copy-last{width:var(--about-copy-width);margin-left:var(--about-copy-inset);margin-right:var(--about-copy-inset)}.about-copy-last{margin-left:auto;text-align:right}.about-roles{margin-top:28px;margin-left:var(--about-copy-last-start);margin-right:var(--about-copy-inset)}.about-photo{margin-top:46px;margin-bottom:36px}.about-marquee-track{font-size:54.5vh;font-size:54.5svh;font-weight:400}}
+@media(max-width:768px){
+  #aboutPanel .panel-inner{--about-copy-inset:clamp(12px,3.5vw,20px);--about-copy-width:calc((100% - 2*var(--about-copy-inset)) * .9)}
+  .about-copy-first,.about-copy-last{width:var(--about-copy-width);margin-left:var(--about-copy-inset);margin-right:var(--about-copy-inset)}
+  .about-copy-last{margin-left:auto;text-align:right}
+  .about-roles{margin-top:28px;margin-inline:var(--about-copy-inset)}
+  .about-contact-link{margin-left:auto;margin-right:var(--about-copy-inset)}
+  .about-photo{margin-top:46px;margin-bottom:36px}
+  .about-marquee-track{font-size:54.5vh;font-size:54.5svh;font-weight:400}
+}
 @media(max-width:359px){.site-footer{padding-left:16px;padding-right:16px}}
 @media(hover:none),(pointer:coarse){#cursor{display:none}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition-duration:0s!important}.has-copy-reveal :is(.about-copy,.contact-title){opacity:1;transform:none}.about-marquee-track,.gallery-card{will-change:auto}}

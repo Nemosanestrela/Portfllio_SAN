@@ -407,6 +407,7 @@
     const firstBlock = blocks[0];
     const roles = panel.querySelector('.about-roles');
     const rolesBelowLastBlock = roles && window.matchMedia('(max-width: 768px)');
+    const rolesFooter = roles && document.getElementById('footerBlur');
     panel.style.setProperty('--copy-reveal-duration', Math.round(700 * revealScale) + 'ms');
 
     const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -449,7 +450,8 @@
         }
         if (rolesBelowLastBlock.matches) {
           const bounds = roles.getBoundingClientRect();
-          if (bounds.bottom <= 0 || bounds.top >= window.innerHeight) return;
+          const visibleBottom = rolesFooter?.getBoundingClientRect().top ?? window.innerHeight;
+          if (bounds.bottom <= 0 || bounds.bottom > visibleBottom) return;
         }
       }
       roles.classList.add('is-roles-visible');
@@ -623,6 +625,7 @@
       lastScrollTop = nextScrollTop;
       if (moved && canReveal()) hasScrolled = true;
       revealVisibleCopies();
+      if (rolesBelowLastBlock?.matches) syncRoles();
     }
 
     function onFocus(event) {
