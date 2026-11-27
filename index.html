@@ -8,235 +8,92 @@
   <meta name="theme-color" content="#000000">
   <title>Rafael San — Portfólio em manutenção</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23000'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Arial,sans-serif' font-weight='700' font-size='44' fill='%23fff'%3ES%3C/text%3E%3C/svg%3E">
-  <link rel="preload" href="assets/fonts/BricolageGrotesque-Variable.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="preload" href="assets/fonts/Anton-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <script>document.documentElement.classList.add("fonts-loading")</script>
   <style>
-    @font-face{font-family:"Bricolage Grotesque";src:url("assets/fonts/BricolageGrotesque-Variable.ttf") format("truetype");font-style:normal;font-weight:200 800;font-stretch:75% 100%;font-display:swap}
-    @font-face{font-family:Anton;src:url("assets/fonts/Anton-Regular.ttf") format("truetype");font-style:normal;font-weight:400;font-display:swap}
-    :root{color-scheme:dark;background:#000;color:#fff;font-family:"Bricolage Grotesque",sans-serif;font-synthesis:none;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+    @font-face{font-family:"Barlow";src:url("assets/fonts/Barlow-Regular.ttf") format("truetype");font-style:normal;font-weight:400;font-display:swap}
+    @font-face{font-family:"Barlow Semi Condensed";src:url("assets/fonts/BarlowSemiCondensed-SemiBold.ttf") format("truetype");font-style:normal;font-weight:600;font-display:swap}
+    @font-face{font-family:"Barlow";src:url("assets/fonts/Barlow-Italic.ttf") format("truetype");font-style:italic;font-weight:400;font-display:swap}
+    @font-face{font-family:"Barlow Condensed";src:url("assets/fonts/BarlowCondensed-Bold.ttf") format("truetype");font-style:normal;font-weight:700;font-display:swap}
+    @font-face{font-family:"Barlow";src:url("assets/fonts/Barlow-Light.ttf") format("truetype");font-style:normal;font-weight:300;font-display:swap}
+    @font-face{font-family:"Barlow Semi Condensed";src:url("assets/fonts/BarlowSemiCondensed-LightItalic.ttf") format("truetype");font-style:italic;font-weight:300;font-display:swap}
+    @font-face{font-family:"Barlow";src:url("assets/fonts/Barlow-Black.ttf") format("truetype");font-style:normal;font-weight:900;font-display:swap}
+    @font-face{font-family:"Barlow";src:url("assets/fonts/Barlow-Thin.ttf") format("truetype");font-style:normal;font-weight:100;font-display:swap}
+    @font-face{font-family:"Barlow Condensed";src:url("assets/fonts/BarlowCondensed-Light.ttf") format("truetype");font-style:normal;font-weight:300;font-display:swap}
+    @font-face{font-family:"Barlow";src:url("assets/fonts/Barlow-ExtraBold.ttf") format("truetype");font-style:normal;font-weight:800;font-display:swap}
+    @font-face{font-family:"Barlow Semi Condensed";src:url("assets/fonts/BarlowSemiCondensed-Italic.ttf") format("truetype");font-style:italic;font-weight:400;font-display:swap}
+    :root{color-scheme:dark;font-family:Barlow,system-ui,sans-serif;font-synthesis:none;-webkit-text-size-adjust:100%;text-size-adjust:100%;--accent:#1106ec;--edge-fade:clamp(160px,25svh,320px);background:#000;color:#fff}
     *{box-sizing:border-box}
     body{margin:0;min-width:280px;-webkit-font-smoothing:antialiased}
-    main{display:grid;align-items:center;min-height:100vh;min-height:100svh}
-    h1{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:center;width:100%;margin:0;font-size:24pt;font-weight:300;font-stretch:75%;font-optical-sizing:none;font-variation-settings:"opsz" 24,"wdth" 75,"wght" 300;line-height:1.3;text-transform:uppercase}
-    .word{position:relative;display:flex;align-items:center;justify-self:center;min-height:44px;gap:var(--gap,0px);white-space:nowrap;transform:translate(var(--move-x,0px),var(--move-y,0px)) scale(var(--scale-x,1),var(--scale-y,1));transform-origin:center}
-    .word[role="button"]{cursor:default;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none}
-    .word[role="button"]::before{content:"";position:absolute;left:50%;top:50%;width:max(100%,calc(44px / var(--scale-x,1)));height:max(100%,calc(44px / var(--scale-y,1)));transform:translate(-50%,-50%)}
-    .word:focus-visible{outline:1px solid #8d86ff;outline-offset:8px}
-    .word-letter{display:block;pointer-events:none}
-    footer{position:fixed;inset:auto 0 0;display:flex;justify-content:center;padding:0 24px max(56px,env(safe-area-inset-bottom));pointer-events:none}
-    .instagram{display:flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;color:#fff;font-family:Anton,sans-serif;font-size:40px;font-weight:400;line-height:1.2;text-decoration:none;pointer-events:auto;-webkit-tap-highlight-color:transparent;transition:color .2s ease}
-    .instagram:hover,.instagram:active{color:#1106ec}
-    .instagram:focus-visible{outline:2px solid #8d86ff;outline-offset:5px}
-    @media(max-width:700px){h1{grid-template-columns:1fr;grid-template-rows:repeat(3,minmax(0,1fr));height:58vh;height:58svh}footer{padding-bottom:max(32px,env(safe-area-inset-bottom))}.instagram{font-size:32px}}
-    @media(prefers-reduced-motion:reduce){.instagram{transition:none}}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .loop-wall{display:flex;flex-direction:column;justify-content:center;height:100vh;height:100svh;overflow:hidden}
+    .loop-row{display:flex;flex:none;align-items:center;min-width:0;height:1.05em;font-family:var(--row-font,Barlow),sans-serif;font-weight:var(--row-weight,400);font-style:var(--row-style,normal);font-size:clamp(26px,8.2vh,132px);font-size:clamp(26px,8.2svh,132px);line-height:1.05;text-transform:uppercase}
+    .loop-row:nth-child(6){font-size:clamp(41.6px,13.12vh,211.2px);font-size:clamp(41.6px,13.12svh,211.2px)}
+    .loop-track{display:flex;flex:none;width:max-content;white-space:nowrap;will-change:transform;animation:marquee var(--duration,84s) linear infinite;animation-delay:var(--delay,0s)}
+    .loop-group{display:flex;flex:none}
+    .loop-group span{display:block;flex:none;padding-right:.55em}
+    .top-shadow{position:fixed;inset:0 0 auto;height:calc(var(--edge-fade) + env(safe-area-inset-top));z-index:2;pointer-events:none;background:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.8) 38%,rgba(0,0,0,.3) 72%,transparent 100%)}
+    .social-links{display:flex;align-items:center;justify-content:center;font-family:"Barlow Semi Condensed",sans-serif;font-size:clamp(24px,2.08vw,30px);font-weight:600;line-height:1.2;pointer-events:auto}
+    .social-links a{display:flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;color:#fff;text-decoration:none;pointer-events:auto;-webkit-tap-highlight-color:transparent;transition:color .25s ease}
+    .social-links a:hover,.social-links a:active{color:var(--accent)}
+    a:focus-visible{outline:2px solid #aaa4ff;outline-offset:5px}
+    footer{position:fixed;inset:auto 0 0;z-index:2;display:flex;align-items:flex-end;justify-content:center;height:var(--edge-fade);padding:0 24px max(24px,env(safe-area-inset-bottom));background:linear-gradient(to top,#000 0%,rgba(0,0,0,.8) 38%,rgba(0,0,0,.3) 72%,transparent 100%);pointer-events:none;color:#81818a;text-align:center;font-size:14px;line-height:1.5}
+    #cursor{position:fixed;left:0;top:0;width:12px;height:12px;background:var(--accent);border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:1000;opacity:0;transition:width .2s ease,height .2s ease,opacity .15s ease}
+    #cursor.is-visible{opacity:1}
+    #cursor.active{width:18px;height:18px}
+    @media(hover:hover) and (pointer:fine){body.has-custom-cursor,body.has-custom-cursor a{cursor:none}}
+    @media(hover:none),(pointer:coarse){#cursor{display:none}}
+    @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    @media(prefers-reduced-motion:reduce){.loop-track{animation:none;transform:translateX(var(--static-offset,0%));will-change:auto}.social-links a,#cursor{transition:none}}
+    .loop-wall{transition:opacity .6s ease}
+    .fonts-loading .loop-wall{opacity:0}
+    .fonts-loading .loop-track{animation-play-state:paused}
+    @media(prefers-reduced-motion:reduce){.loop-wall{transition:none}}
   </style>
 </head>
 <body>
+  <div id="cursor" aria-hidden="true"></div>
+  <div class="top-shadow" aria-hidden="true"></div>
   <main>
-    <h1 aria-label="Portfólio em manutenção">
-      <span class="word" role="button" tabindex="0" aria-label="Expandir a palavra portfólio" aria-pressed="false">PORTFÓLIO</span>
-      <span class="word" aria-hidden="true">EM</span>
-      <span class="word" role="button" tabindex="0" aria-label="Expandir a palavra manutenção" aria-pressed="false">MANUTENÇÃO</span>
-    </h1>
+    <h1 class="sr-only">Portfólio em manutenção</h1>
+    <div class="loop-wall" aria-hidden="true">
+      <div class="loop-row" style="--duration:114s;--delay:-74s;--static-offset:-8%;--row-font:Barlow;--row-weight:100;--row-style:normal"><div class="loop-track"><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div></div></div>
+      <div class="loop-row" style="--duration:84s;--delay:-9s;--static-offset:-3%;--row-font:Barlow;--row-weight:400;--row-style:normal"><div class="loop-track"><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div></div></div>
+      <div class="loop-row" style="--duration:108s;--delay:-34s;--static-offset:-12%;--row-font:Barlow Semi Condensed;--row-weight:600;--row-style:normal"><div class="loop-track"><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div></div></div>
+      <div class="loop-row" style="--duration:72s;--delay:-43s;--static-offset:-7%;--row-font:Barlow;--row-weight:400;--row-style:italic"><div class="loop-track"><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div></div></div>
+      <div class="loop-row" style="--duration:123s;--delay:-26s;--static-offset:-9%;--row-font:Barlow Condensed;--row-weight:300;--row-style:normal"><div class="loop-track"><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div></div></div>
+      <div class="loop-row" style="--duration:96s;--delay:-19s;--static-offset:-15%;--row-font:Barlow Condensed;--row-weight:700;--row-style:normal"><div class="loop-track"><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div></div></div>
+      <div class="loop-row" style="--duration:120s;--delay:-68s;--static-offset:-1%;--row-font:Barlow;--row-weight:300;--row-style:normal"><div class="loop-track"><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div></div></div>
+      <div class="loop-row" style="--duration:78s;--delay:-27s;--static-offset:-10%;--row-font:Barlow Semi Condensed;--row-weight:300;--row-style:italic"><div class="loop-track"><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div></div></div>
+      <div class="loop-row" style="--duration:90s;--delay:-49s;--static-offset:-13%;--row-font:Barlow;--row-weight:800;--row-style:normal"><div class="loop-track"><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div></div></div>
+      <div class="loop-row" style="--duration:66s;--delay:-41s;--static-offset:-4%;--row-font:Barlow Semi Condensed;--row-weight:400;--row-style:italic"><div class="loop-track"><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div></div></div>
+      <div class="loop-row" style="--duration:102s;--delay:-51s;--static-offset:-5%;--row-font:Barlow;--row-weight:900;--row-style:normal"><div class="loop-track"><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div></div></div>
+    </div>
   </main>
   <footer>
-    <a class="instagram" href="https://www.instagram.com/nemosanestrela" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
+    <nav class="social-links" aria-label="Redes sociais">
+      <a href="https://www.instagram.com/nemosanestrela" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
+    </nav>
   </footer>
   <script>
-    (() => {
-      const words = Array.from(document.querySelectorAll('.word'));
-      const heading = document.querySelector('h1');
-      const hover = matchMedia('(hover: hover) and (pointer: fine)');
-      const mobileLayout = matchMedia('(max-width: 700px)');
-      const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-      const spring = value => ({ value, velocity: 0, target: value });
-      const motion = words.map(() => ({ spread: spring(0), move: spring(0), squeeze: spring(1) }));
-      const gaps = words.map(word => {
-        const characters = Array.from(word.textContent);
-        word.replaceChildren(...characters.map(character => {
-          const span = document.createElement('span');
-          span.className = 'word-letter';
-          span.setAttribute('aria-hidden', 'true');
-          span.textContent = character;
-          return span;
-        }));
-        return Math.max(1, characters.length - 1);
-      });
-      let active = -1;
-      let vertical = mobileLayout.matches;
-      let axisStart = 0;
-      let axisEnd = innerWidth;
-      let hoverStartedAt = 0;
-      let bounds = [];
-      let expansion = [];
-      let frame = 0;
-      let lastTime = 0;
-      const near = rect => vertical ? rect.top : rect.left;
-      const far = rect => vertical ? rect.bottom : rect.right;
-      const length = rect => vertical ? rect.height : rect.width;
-
-      function draw() {
-        motion.forEach((state, index) => {
-          const extra = state.spread.value;
-          const direction = index === 0 ? 1 : -1;
-          const move = state.move.value + direction * extra / 2;
-          const scale = vertical ? (1 + extra / (bounds[index]?.height || 44)) * state.squeeze.value : state.squeeze.value;
-          words[index].style.setProperty('--gap', vertical ? '0px' : extra / gaps[index] + 'px');
-          words[index].style.setProperty('--move-x', vertical ? '0px' : move + 'px');
-          words[index].style.setProperty('--move-y', vertical ? move + 'px' : '0px');
-          words[index].style.setProperty('--scale-x', vertical ? 1 : scale);
-          words[index].style.setProperty('--scale-y', vertical ? scale : 1);
-        });
-      }
-
-      // Exact critically damped springs: gradual acceleration, then a soft landing.
-      function advance(state, elapsed, frequency) {
-        const distance = state.value - state.target;
-        const impulse = state.velocity + frequency * distance;
-        const decay = Math.exp(-frequency * elapsed);
-        state.value = state.target + (distance + impulse * elapsed) * decay;
-        state.velocity = (state.velocity - frequency * impulse * elapsed) * decay;
-        if (Math.abs(state.value - state.target) < .001 && Math.abs(state.velocity) < .005) {
-          state.value = state.target;
-          state.velocity = 0;
-          return false;
-        }
-        return true;
-      }
-
-      function animate(time) {
-        frame = 0;
-        const elapsed = lastTime ? Math.min((time - lastTime) / 1000, .05) : 1 / 60;
-        lastTime = time;
-        setTargets(time);
-        let moving = false;
-        motion.forEach((state, index) => {
-          const frequency = active < 0 ? 5.2 : index === active ? 8 : 6.4 - Math.abs(index - active) * .2;
-          Object.values(state).forEach(value => { moving = advance(value, elapsed, frequency) || moving; });
-        });
-        draw();
-        if (moving || active >= 0) frame = requestAnimationFrame(animate);
-        else lastTime = 0;
-      }
-
-      function setTargets(time) {
-        motion.forEach(state => {
-          state.spread.target = 0;
-          state.move.target = 0;
-          state.squeeze.target = 1;
-        });
-        if (active === 0 || active === 2) {
-          const held = Math.max(0, (time - hoverStartedAt) / 1000);
-          // A quick first response followed by a long, continuously slowing tail.
-          const pressure = .72 * (1 - Math.exp(-held / .4)) + .28 * held / (held + 7);
-          const extra = (expansion[active] || 0) * pressure;
-          const direction = active === 0 ? 1 : -1;
-          motion[active].spread.target = extra;
-          motion.forEach((state, index) => {
-            if (index === active) return;
-            const minimumScale = index === 1 ? .24 : .34;
-            const scale = 1 - (1 - minimumScale) * pressure;
-            const margin = vertical ? 12 : 24;
-            const center = (near(bounds[index]) + far(bounds[index])) / 2;
-            const halfWidth = length(bounds[index]) * scale / 2;
-            const safeShift = Math.max(0, direction > 0
-              ? axisEnd - margin - center - halfWidth
-              : center - axisStart - margin - halfWidth);
-            state.move.target = direction * Math.min(extra * (index === 1 ? .66 : .38), safeShift);
-            state.squeeze.target = scale;
-          });
-        }
-      }
-
-      function update() {
-        const allowed = vertical || hover.matches;
-        if (reducedMotion.matches || !allowed) active = -1;
-        words.forEach((word, index) => {
-          if (index !== 1) word.setAttribute('aria-pressed', String(active === index));
-        });
-        setTargets(performance.now());
-        if (reducedMotion.matches || !allowed) {
-          cancelAnimationFrame(frame);
-          frame = 0;
-          lastTime = 0;
-          motion.forEach(state => Object.values(state).forEach(value => {
-            value.value = value.target;
-            value.velocity = 0;
-          }));
-          draw();
-          return;
-        }
-        if (!frame) {
-          lastTime = 0;
-          frame = requestAnimationFrame(animate);
-        }
-      }
-
-      function measure() {
-        const changedAxis = vertical !== mobileLayout.matches;
-        vertical = mobileLayout.matches;
-        if (changedAxis) {
-          active = -1;
-          motion.forEach(state => Object.entries(state).forEach(([name, value]) => {
-            value.value = value.target = name === 'squeeze' ? 1 : 0;
-            value.velocity = 0;
-          }));
-        }
-        const styles = words.map(word => word.style.cssText);
-        words.forEach(word => word.removeAttribute('style'));
-        bounds = words.map(word => word.getBoundingClientRect());
-        const area = heading.getBoundingClientRect();
-        axisStart = vertical ? area.top : 0;
-        axisEnd = vertical ? area.bottom : innerWidth;
-        const margin = vertical ? 12 : 24;
-        const breathingRoom = vertical ? 12 : 24;
-        const roomOnRight = axisEnd - margin - near(bounds[0]) - length(bounds[0])
-          - length(bounds[1]) * .24 - length(bounds[2]) * .34 - breathingRoom * 2;
-        const roomOnLeft = far(bounds[2]) - axisStart - margin - length(bounds[2])
-          - length(bounds[1]) * .24 - length(bounds[0]) * .34 - breathingRoom * 2;
-        const sharedExpansion = Math.max(0, Math.min((axisEnd - axisStart) * .56, roomOnRight * .92, roomOnLeft * .92));
-        expansion = [sharedExpansion, 0, sharedExpansion];
-        words.forEach((word, index) => { word.style.cssText = styles[index]; });
-        draw();
-        update();
-      }
-
-      words.forEach((word, index) => {
-        if (index === 1) return;
-        word.addEventListener('pointerenter', event => {
-          if (vertical || !hover.matches || event.pointerType === 'touch') return;
-          activate(index);
-        });
-        word.addEventListener('pointerleave', () => {
-          if (!vertical && active === index) reset();
-        });
-        word.addEventListener('click', () => {
-          if (vertical) activate(active === index ? -1 : index);
-        });
-        word.addEventListener('keydown', event => {
-          if (event.key !== 'Enter' && event.key !== ' ') return;
-          event.preventDefault();
-          activate(active === index ? -1 : index);
-        });
-      });
-      function activate(index) {
-        if (reducedMotion.matches) return;
-        active = index;
-        hoverStartedAt = performance.now();
-        update();
-      }
-      function reset() { active = -1; update(); }
-      document.addEventListener('pointerdown', event => {
-        if (!words[0].contains(event.target) && !words[2].contains(event.target)) reset();
-      });
-      hover.addEventListener('change', reset);
-      mobileLayout.addEventListener('change', measure);
-      reducedMotion.addEventListener('change', reset);
-      window.addEventListener('blur', reset);
-      window.addEventListener('resize', measure);
-      document.fonts.ready.then(measure);
-      measure();
-    })();
+    document.fonts.ready.then(() => document.documentElement.classList.remove('fonts-loading'));
+    const cursor = document.getElementById('cursor');
+    const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
+    function hideCursor() { cursor.classList.remove('is-visible', 'active'); }
+    function updateCursorMode() {
+      document.body.classList.toggle('has-custom-cursor', finePointer.matches);
+      hideCursor();
+    }
+    document.addEventListener('pointermove', event => {
+      if (!finePointer.matches || event.pointerType === 'touch') return;
+      cursor.style.left = event.clientX + 'px';
+      cursor.style.top = event.clientY + 'px';
+      cursor.classList.add('is-visible');
+      cursor.classList.toggle('active', Boolean(event.target.closest('a,button,input,textarea')));
+    });
+    document.documentElement.addEventListener('pointerleave', hideCursor);
+    window.addEventListener('blur', hideCursor);
+    finePointer.addEventListener('change', updateCursorMode);
+    updateCursorMode();
   </script>
 </body>
 </html>
