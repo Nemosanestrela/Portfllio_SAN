@@ -13,59 +13,42 @@
     @font-face{font-family:Inter;src:url("assets/fonts/Inter-Variable.ttf") format("truetype");font-style:normal;font-weight:100 900;font-display:swap}
     :root{color-scheme:dark;font-family:Inter,system-ui,sans-serif;font-synthesis:none;-webkit-text-size-adjust:100%;text-size-adjust:100%;--accent:#1106ec;background:#000;color:#fff}
     *{box-sizing:border-box}
-    body{margin:0;min-width:280px;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}
-    header{padding:clamp(24px,3.333vw,48px) clamp(24px,3.333vw,64px);padding-top:max(clamp(24px,3.333vw,48px),env(safe-area-inset-top))}
-    .brand{display:inline-block;font-family:Anton,sans-serif;font-size:48px;line-height:1;letter-spacing:-.01em}
-    main{flex:1;display:grid;place-items:center;padding:32px 24px 132px}
-    .message{width:100%;max-width:960px;text-align:center}
-    .eyebrow{margin:0 0 22px;color:#9c96ff;font-size:14px;font-weight:500;line-height:1.5;letter-spacing:.12em;text-transform:uppercase}
-    h1{margin:0;font-family:Anton,sans-serif;font-size:clamp(36px,10vw,104px);font-weight:400;line-height:1.06;letter-spacing:.01em;text-transform:uppercase}
-    .description{max-width:43ch;margin:26px auto 0;color:#a5a5ad;font-size:clamp(16px,1.5vw,18px);line-height:1.65}
-    .social-menu{position:relative;width:min(100%,280px);margin:32px auto 0;text-align:left}
-    summary{display:flex;min-height:54px;align-items:center;justify-content:space-between;gap:20px;padding:15px 24px;border:1px solid #ffffff29;border-radius:999px;background:#fff;color:#000;list-style:none;font-size:16px;font-weight:600;line-height:1.4;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;transition:background .2s ease,color .2s ease,border-color .2s ease}
-    summary::-webkit-details-marker{display:none}
-    summary:hover,summary:active,.social-menu[open] summary{border-color:var(--accent);background:var(--accent);color:#fff}
-    summary svg{flex:none;width:18px;height:18px;transition:transform .25s ease}
-    .social-menu[open] summary svg{transform:rotate(45deg)}
-    nav{position:absolute;top:calc(100% + 12px);inset-inline:0;z-index:1;display:grid;gap:4px;padding:8px;border:1px solid #ffffff29;border-radius:20px;background:#101012;box-shadow:0 16px 40px #0008}
-    nav a{display:flex;min-height:44px;align-items:center;padding:10px 16px;border-radius:12px;color:#eeeef2;text-decoration:none;font-size:16px;line-height:1.5;transition:background .2s ease,color .2s ease}
-    nav a:hover,nav a:active{background:#ffffff0d;color:#aaa4ff}
-    summary:focus-visible,a:focus-visible{outline:2px solid #aaa4ff;outline-offset:5px}
-    footer{padding:0 24px max(24px,env(safe-area-inset-bottom));color:#81818a;text-align:center;font-size:14px;line-height:1.5}
+    body{margin:0;min-width:280px;-webkit-font-smoothing:antialiased}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .loop-wall{display:grid;grid-template-rows:repeat(7,minmax(0,1fr));height:100vh;height:100svh;overflow:hidden}
+    .loop-row{display:flex;align-items:center;min-width:0;overflow:hidden;font-family:Anton,sans-serif;font-size:clamp(32px,11.1vh,160px);font-size:clamp(32px,11.1svh,160px);line-height:1.25;text-transform:uppercase}
+    .loop-track{display:flex;flex:none;width:max-content;white-space:nowrap;will-change:transform;animation:marquee var(--duration,84s) linear infinite;animation-delay:var(--delay,0s)}
+    .loop-group{display:flex;flex:none}
+    .loop-group span{display:block;flex:none;padding-right:.55em}
+    .header-blur{position:fixed;inset:0 0 auto;height:calc(140px + env(safe-area-inset-top));z-index:2;pointer-events:none;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);background:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.55) 48%,transparent 100%);mask-image:linear-gradient(to bottom,#000 0px,#000 88px,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,#000 0px,#000 88px,transparent 100%)}
+    .social-links{position:fixed;inset:0 0 auto;z-index:3;display:flex;align-items:center;justify-content:flex-end;gap:20px;height:calc(120px + env(safe-area-inset-top));padding:env(safe-area-inset-top) clamp(24px,3.333vw,64px) 0;font-family:Anton,sans-serif;font-size:clamp(20px,2.08vw,30px);font-weight:400;line-height:1.2;pointer-events:none}
+    .social-links a{display:flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;color:#fff;text-decoration:none;pointer-events:auto;-webkit-tap-highlight-color:transparent;transition:color .25s ease}
+    .social-links a:hover,.social-links a:active{color:var(--accent)}
+    a:focus-visible{outline:2px solid #aaa4ff;outline-offset:5px}
+    footer{position:fixed;inset:auto 0 0;z-index:2;display:flex;align-items:flex-end;justify-content:center;height:120px;padding:0 24px max(24px,env(safe-area-inset-bottom));background:linear-gradient(to top,#000 0%,rgba(0,0,0,.65) 40%,transparent 100%);pointer-events:none;color:#81818a;text-align:center;font-size:14px;line-height:1.5}
     footer p{margin:0}
-    @media(prefers-reduced-motion:no-preference){.message{animation:reveal .75s cubic-bezier(.22,1,.36,1) both}}
-    @keyframes reveal{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-    @media(prefers-reduced-motion:reduce){summary,summary svg,nav a{transition:none}}
+    @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    @media(prefers-reduced-motion:reduce){.loop-track{animation:none;transform:translateX(var(--static-offset,0%));will-change:auto}.social-links a{transition:none}}
   </style>
 </head>
 <body>
-  <header><span class="brand" aria-label="SAN, Rafael San">SAN</span></header>
+  <div class="header-blur" aria-hidden="true"></div>
+  <nav class="social-links" aria-label="Redes sociais">
+    <a href="https://www.instagram.com/nemosanestrela" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
+    <a href="https://www.behance.net/rafaelsanea60f" target="_blank" rel="noopener noreferrer" aria-label="Behance">BE</a>
+  </nav>
   <main>
-    <div class="message">
-      <p class="eyebrow">Rafael San · Portfólio</p>
-      <h1>Portfólio<br>em manutenção.</h1>
-      <p class="description">Estou atualizando as imagens e os projetos do meu portfólio. Em breve, a versão completa estará disponível.</p>
-      <details class="social-menu">
-        <summary>Behance / Instagram<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
-        <nav aria-label="Redes sociais">
-          <a href="https://www.behance.net/rafaelsanea60f" target="_blank" rel="noopener noreferrer">Behance</a>
-          <a href="https://www.instagram.com/nemosanestrela" target="_blank" rel="noopener noreferrer">Instagram</a>
-        </nav>
-      </details>
+    <h1 class="sr-only">Portfólio em manutenção</h1>
+    <div class="loop-wall" aria-hidden="true">
+      <div class="loop-row" style="--duration:84s;--delay:-9s;--static-offset:-3%"><div class="loop-track"><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div></div></div>
+      <div class="loop-row" style="--duration:108s;--delay:-34s;--static-offset:-12%"><div class="loop-track"><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div></div></div>
+      <div class="loop-row" style="--duration:72s;--delay:-43s;--static-offset:-7%"><div class="loop-track"><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div></div></div>
+      <div class="loop-row" style="--duration:96s;--delay:-19s;--static-offset:-15%"><div class="loop-track"><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div></div></div>
+      <div class="loop-row" style="--duration:120s;--delay:-68s;--static-offset:-1%"><div class="loop-track"><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div></div></div>
+      <div class="loop-row" style="--duration:78s;--delay:-27s;--static-offset:-10%"><div class="loop-track"><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div></div></div>
+      <div class="loop-row" style="--duration:102s;--delay:-51s;--static-offset:-5%"><div class="loop-track"><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div><div class="loop-group"><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span><span>Portfólio em manutenção</span></div></div></div>
     </div>
   </main>
   <footer><p>© SAN 2026</p></footer>
-  <script>
-    const socialMenu = document.querySelector('.social-menu');
-    document.addEventListener('click', event => {
-      if (socialMenu.open && !socialMenu.contains(event.target)) socialMenu.open = false;
-    });
-    document.addEventListener('keydown', event => {
-      if (event.key === 'Escape' && socialMenu.open) {
-        socialMenu.open = false;
-        socialMenu.querySelector('summary').focus();
-      }
-    });
-  </script>
 </body>
 </html>
