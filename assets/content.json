@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "revision": "2026-11-10T12:39:52.072Z-1dc614cc",
+  "revision": "2026-11-27T20:39:15.527Z-1796efdd",
   "projects": [
     {
       "id": "brand-01",
@@ -12,6 +12,7 @@
       "categoryLabel": "Brand",
       "title": "Estudo de marca 01",
       "hidden": false,
+      "locked": true,
       "images": [
         {
           "src": "assets/uploads/banner-kv-002d8e2d-c29c-4fba-8c70-79c779efb5bf.png",
@@ -31,6 +32,7 @@
       "categoryLabel": "Brand",
       "title": "Estudo de marca 02",
       "hidden": false,
+      "locked": true,
       "images": []
     },
     {
@@ -43,6 +45,7 @@
       "categoryLabel": "Brand",
       "title": "Estudo de marca 03",
       "hidden": false,
+      "locked": true,
       "images": []
     },
     {
@@ -55,6 +58,7 @@
       "categoryLabel": "E-commerce",
       "title": "Estudo digital 01",
       "hidden": false,
+      "locked": true,
       "images": []
     },
     {
@@ -67,6 +71,7 @@
       "categoryLabel": "E-commerce",
       "title": "Estudo digital 02",
       "hidden": false,
+      "locked": true,
       "images": []
     },
     {
@@ -79,6 +84,7 @@
       "categoryLabel": "E-commerce",
       "title": "Estudo digital 03",
       "hidden": false,
+      "locked": true,
       "images": []
     },
     {
@@ -91,6 +97,7 @@
       "categoryLabel": "Ilustração",
       "title": "Estudo autoral 02",
       "hidden": false,
+      "locked": true,
       "images": []
     },
     {
@@ -103,6 +110,7 @@
       "categoryLabel": "Ilustração",
       "title": "Estudo autoral 01",
       "hidden": false,
+      "locked": true,
       "images": []
     },
     {
@@ -115,6 +123,7 @@
       "categoryLabel": "Ilustração",
       "title": "Estudo autoral 03",
       "hidden": false,
+      "locked": true,
       "images": []
     },
     {
@@ -127,6 +136,7 @@
       "categoryLabel": "Brand",
       "title": "SG Nickel +",
       "hidden": false,
+      "locked": false,
       "images": [
         {
           "src": "assets/uploads/e-mail-e2070969-352f-482d-bec5-46350adfd931.png",
@@ -146,6 +156,7 @@
       "categoryLabel": "E-commerce",
       "title": "Cocada dos Sonhos",
       "hidden": false,
+      "locked": false,
       "images": [
         {
           "src": "assets/uploads/desktop-a1b2ca3f-cffc-4187-a47c-7ffd1c28f00d.png",
@@ -165,6 +176,7 @@
       "categoryLabel": "Brand",
       "title": "FOM",
       "hidden": false,
+      "locked": false,
       "images": []
     },
     {
@@ -177,6 +189,7 @@
       "categoryLabel": "E-commerce",
       "title": "Elixir",
       "hidden": false,
+      "locked": false,
       "images": []
     },
     {
@@ -189,6 +202,7 @@
       "categoryLabel": "E-commerce",
       "title": "Elixir",
       "hidden": false,
+      "locked": false,
       "images": []
     },
     {
@@ -201,6 +215,7 @@
       "categoryLabel": "Brand",
       "title": "Timbra",
       "hidden": false,
+      "locked": false,
       "images": []
     },
     {
@@ -213,6 +228,7 @@
       "categoryLabel": "Brand",
       "title": "Timbra",
       "hidden": false,
+      "locked": false,
       "images": []
     },
     {
@@ -225,6 +241,7 @@
       "categoryLabel": "Brand",
       "title": "SG",
       "hidden": false,
+      "locked": false,
       "images": []
     },
     {
@@ -237,6 +254,7 @@
       "categoryLabel": "E-commerce",
       "title": "IZZO / Winner",
       "hidden": false,
+      "locked": false,
       "images": []
     },
     {
@@ -249,6 +267,7 @@
       "categoryLabel": "E-commerce",
       "title": "IZZO",
       "hidden": false,
+      "locked": false,
       "images": []
     },
     {
@@ -261,6 +280,7 @@
       "categoryLabel": "E-commerce",
       "title": "IZZO",
       "hidden": false,
+      "locked": false,
       "images": []
     },
     {
@@ -273,6 +293,7 @@
       "categoryLabel": "E-commerce",
       "title": "IZZO",
       "hidden": false,
+      "locked": false,
       "images": []
     },
     {
@@ -285,6 +306,7 @@
       "categoryLabel": "E-commerce",
       "title": "IZZO",
       "hidden": false,
+      "locked": false,
       "images": []
     },
     {
@@ -297,6 +319,7 @@
       "categoryLabel": "E-commerce",
       "title": "IZZO / DUNLOP",
       "hidden": false,
+      "locked": false,
       "images": []
     },
     {
@@ -309,6 +332,7 @@
       "categoryLabel": "E-commerce",
       "title": "IZZO / ERNIE BALL",
       "hidden": false,
+      "locked": false,
       "images": []
     },
     {
@@ -321,6 +345,7 @@
       "categoryLabel": "Brand",
       "title": "XERYUS / WARNER",
       "hidden": false,
+      "locked": false,
       "images": []
     },
     {
@@ -333,6 +358,7 @@
       "categoryLabel": "E-commerce",
       "title": "XERYUS / QUILKSILVER",
       "hidden": false,
+      "locked": false,
       "images": []
     },
     {
@@ -345,6 +371,7 @@
       "categoryLabel": "Ilustração",
       "title": "Natureza",
       "hidden": false,
+      "locked": false,
       "images": []
     },
     {
@@ -357,6 +384,7 @@
       "categoryLabel": "Brand",
       "title": "Mockup Trem V3",
       "hidden": false,
+      "locked": false,
       "images": []
     },
     {
@@ -369,6 +397,7 @@
       "categoryLabel": "Brand",
       "title": "Mockup feed V2",
       "hidden": false,
+      "locked": false,
       "images": []
     },
     {
@@ -381,6 +410,7 @@
       "categoryLabel": "Brand",
       "title": "SG",
       "hidden": false,
+      "locked": false,
       "images": []
     }
   ],
@@ -400,11 +430,11 @@
   },
   "site": {
     "accent": "#1106ec",
-    "backgroundColor": "#000000",
     "bodyColor": null,
     "chromeColor": "#ffffff",
     "contactColor": "#ffffff",
     "marqueeColor": null,
+    "fontLibrary": [],
     "chromeFont": "Anton",
     "bodyFont": "Inter",
     "contactFont": "Anton",
