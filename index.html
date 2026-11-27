@@ -15,8 +15,9 @@
     *{box-sizing:border-box}
     body{margin:0;min-width:280px;-webkit-font-smoothing:antialiased}
     .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-    .loop-wall{display:grid;grid-template-rows:repeat(7,minmax(0,1fr));height:100vh;height:100svh;overflow:hidden}
-    .loop-row{display:flex;align-items:center;min-width:0;overflow:hidden;font-family:Anton,sans-serif;font-size:clamp(32px,11.1vh,160px);font-size:clamp(32px,11.1svh,160px);line-height:1.25;text-transform:uppercase}
+    .loop-wall{display:grid;grid-template-rows:repeat(3,minmax(0,1fr)) minmax(0,1.6fr) repeat(3,minmax(0,1fr));height:100vh;height:100svh;overflow:hidden}
+    .loop-row{display:flex;align-items:center;min-width:0;font-family:Anton,sans-serif;font-size:clamp(32px,11.1vh,160px);font-size:clamp(32px,11.1svh,160px);line-height:1.25;text-transform:uppercase}
+    .loop-row:nth-child(4){font-size:clamp(51.2px,17.76vh,256px);font-size:clamp(51.2px,17.76svh,256px)}
     .loop-track{display:flex;flex:none;width:max-content;white-space:nowrap;will-change:transform;animation:marquee var(--duration,84s) linear infinite;animation-delay:var(--delay,0s)}
     .loop-group{display:flex;flex:none}
     .loop-group span{display:block;flex:none;padding-right:.55em}
