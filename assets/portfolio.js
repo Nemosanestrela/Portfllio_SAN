@@ -831,15 +831,64 @@
     }
     const contactForm = $('#contactForm');
     if (contactForm) {
-      contactForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const status = $('#contactSuccess');
+      const status = $('#contactSuccess');
+      const submitButton = $('[type="submit"]', contactForm);
+      let sending = false;
+      function showContactStatus(text, error = false) {
         if (status) {
-          status.textContent = 'O envio pelo formulário ainda não está disponível.';
+          status.textContent = text;
           status.hidden = false;
-          status.setAttribute('role', 'status');
-          status.setAttribute('aria-live', 'polite');
+          status.setAttribute('role', error ? 'alert' : 'status');
+          status.setAttribute('aria-live', error ? 'assertive' : 'polite');
+          status.classList.toggle('is-error', error);
           status.classList.add('is-visible');
+        }
+      }
+      contactForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (sending || !contactForm.reportValidity()) return;
+        const data = Object.fromEntries(new FormData(contactForm));
+        const subject = String(data.assunto || '').replace(/\s+/g, ' ').trim();
+        data._subject = `Portfólio Rafael San — ${subject}`;
+        data._replyto = String(data.email || '').trim();
+        const controls = Array.from(contactForm.querySelectorAll('input:not([type="hidden"]),textarea'));
+        const readonly = controls.map(control => control.readOnly);
+        const originalLabel = submitButton.textContent;
+        sending = true;
+        contactForm.setAttribute('aria-busy', 'true');
+        submitButton.disabled = true;
+        submitButton.textContent = 'Enviando…';
+        controls.forEach(control => { control.readOnly = true; });
+        showContactStatus('Enviando sua mensagem…');
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 20000);
+        try {
+          const response = await fetch(contactForm.dataset.endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify(data),
+            signal: controller.signal,
+          });
+          const result = await response.json().catch(() => null);
+          if (!response.ok || !result || (result.success !== true && result.success !== 'true')) {
+            throw new Error('Submission rejected');
+          }
+          showContactStatus('Mensagem enviada! Obrigado pelo contato.');
+          contactForm.reset();
+        } catch (error) {
+          const text = error.name === 'AbortError'
+            ? 'O envio demorou mais que o esperado. Seus dados foram mantidos; tente novamente.'
+            : navigator.onLine === false
+              ? 'Você está sem conexão. Confira sua rede e tente novamente.'
+              : 'Não foi possível enviar agora. Seus dados foram mantidos; tente novamente em instantes.';
+          showContactStatus(text, true);
+        } finally {
+          clearTimeout(timeout);
+          sending = false;
+          contactForm.removeAttribute('aria-busy');
+          submitButton.disabled = false;
+          submitButton.textContent = originalLabel;
+          controls.forEach((control, index) => { control.readOnly = readonly[index]; });
         }
       });
       contactForm.addEventListener('reset', () => requestAnimationFrame(resizeMessage));

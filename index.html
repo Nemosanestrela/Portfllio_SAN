@@ -12,13 +12,13 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23000'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Arial,sans-serif' font-weight='700' font-size='44' fill='%23fff'%3ES%3C/text%3E%3C/svg%3E">
 <link rel="preload" href="assets/fonts/Anton-Regular.ttf" as="font" type="font/ttf" crossorigin>
 <link rel="preload" href="assets/fonts/Inter-Variable.ttf" as="font" type="font/ttf" crossorigin>
-<link rel="stylesheet" href="assets/portfolio.css?v=6e09b2a3bd">
-<script src="assets/projects.js" defer></script>
-<script src="assets/site-settings.js" defer></script>
-<script src="assets/content.js" defer></script>
-<script src="assets/responsive-images.js" defer></script>
+<link rel="stylesheet" href="assets/portfolio.css?v=23909e6bf2">
+<script src="assets/projects.js?v=356de6d237" defer></script>
+<script src="assets/site-settings.js?v=1463125e9a" defer></script>
+<script src="assets/content.js?v=1bbbcd1ecd" defer></script>
+<script src="assets/responsive-images.js?v=ad5bd413bd" defer></script>
 <script src="assets/gallery.js?v=a920723e75" defer></script>
-<script src="assets/portfolio.js?v=4603ec4e29" defer></script>
+<script src="assets/portfolio.js?v=2d3cdbb2f1" defer></script>
 <script src="assets/about.js?v=700d93c9e6" defer></script>
 </head>
 <body>
@@ -93,13 +93,16 @@
   <div class="panel-inner">
     <div class="contact-layout">
       <h2 class="contact-title" id="contactTitle" tabindex="-1">TEM UM PROJETO LEGAL?<br>ME MANDA UM OI!</h2>
-      <form class="contact-form" id="contactForm">
+      <form class="contact-form" id="contactForm" action="https://formsubmit.co/rafaelsanestrela@gmail.com" method="POST" data-endpoint="https://formsubmit.co/ajax/rafaelsanestrela@gmail.com">
+        <input type="hidden" name="_subject" value="Contato pelo portfólio — Rafael San">
+        <input type="hidden" name="_template" value="table">
+        <div class="contact-honeypot" aria-hidden="true"><label for="cWebsite">Website</label><input type="text" id="cWebsite" name="_honey" tabindex="-1" autocomplete="off"></div>
         <div class="field-row">
-          <div class="field"><label for="cName">Nome</label><input type="text" id="cName" name="nome" autocomplete="name" required></div>
-          <div class="field"><label for="cEmail">E-mail</label><input type="email" id="cEmail" name="email" autocomplete="email" required></div>
+          <div class="field"><label for="cName">Nome</label><input type="text" id="cName" name="nome" autocomplete="name" maxlength="120" required></div>
+          <div class="field"><label for="cEmail">E-mail</label><input type="email" id="cEmail" name="email" autocomplete="email" maxlength="254" required></div>
         </div>
-        <div class="field"><label for="cSubject">Assunto</label><input type="text" id="cSubject" name="assunto" required></div>
-        <div class="field"><label for="cMessage">Mensagem</label><textarea id="cMessage" name="mensagem" rows="1" required></textarea></div>
+        <div class="field"><label for="cSubject">Assunto</label><input type="text" id="cSubject" name="assunto" maxlength="200" required></div>
+        <div class="field"><label for="cMessage">Mensagem</label><textarea id="cMessage" name="mensagem" rows="1" maxlength="10000" required></textarea></div>
         <button class="contact-submit" type="submit">Enviar</button>
         <p class="contact-success" id="contactSuccess" role="status" aria-live="polite"></p>
       </form>
@@ -113,7 +116,7 @@
 </footer>
 <div class="image-viewer" id="imageViewer" role="dialog" aria-modal="true" aria-labelledby="viewerTitle" hidden>
   <div class="viewer-backdrop" id="viewerBackdrop"></div>
-  <div class="viewer-stage" id="viewerStage" tabindex="0" role="region" aria-label="Imagens do projeto. Role para ver as próximas imagens."><div class="viewer-project" id="viewerProject"><img class="viewer-image" id="viewerImage" src="assets/uploads/poster_2-fd5b494a-b18c-4e4a-ae54-60dd96c2e605.png" alt="" decoding="async"><div class="viewer-project-images" id="viewerProjectImages" hidden></div></div></div>
+  <div class="viewer-stage" id="viewerStage" tabindex="0" role="region" aria-label="Imagens do projeto. Role para ver as próximas imagens."><div class="viewer-project" id="viewerProject"><img class="viewer-image" id="viewerImage" src="assets/gallery/01.jpg" alt="" decoding="async"><div class="viewer-project-images" id="viewerProjectImages" hidden></div></div></div>
   <div class="viewer-info" id="viewerInfo"><span class="viewer-category" id="viewerCategory"></span><h2 class="viewer-title" id="viewerTitle"></h2></div>
   <div class="viewer-description-disclosure" id="viewerDescriptionDisclosure" hidden>
     <button class="filter-toggle viewer-description-toggle" id="viewerDescriptionToggle" type="button" aria-label="Abrir descrição do projeto" aria-expanded="false" aria-controls="viewerDescriptionPanel"><span aria-hidden="true"></span><span aria-hidden="true"></span></button>
@@ -122,7 +125,7 @@
   <div class="viewer-topbar"><button class="viewer-close" id="viewerClose" type="button" aria-label="Fechar projeto">Fechar<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button></div>
   <div class="viewer-bottom" aria-hidden="true"></div>
 </div>
-<noscript><div class="no-js-gallery"><h1>Projetos de Rafael San</h1><a href="assets/uploads/poster_2-fd5b494a-b18c-4e4a-ae54-60dd96c2e605.png"><img src="assets/uploads/poster_2-fd5b494a-b18c-4e4a-ae54-60dd96c2e605.png" alt="SG Nickel +"></a><a href="assets/gallery/01.jpg"><img src="assets/gallery/01.jpg" alt="Estudo de marca 01"></a><a href="assets/gallery/02.jpg"><img src="assets/gallery/02.jpg" alt="Estudo de marca 02"></a><a href="assets/gallery/03.jpg"><img src="assets/gallery/03.jpg" alt="Estudo de marca 03"></a><a href="assets/gallery/04.jpg"><img src="assets/gallery/04.jpg" alt="Estudo digital 01"></a><a href="assets/gallery/05.jpg"><img src="assets/gallery/05.jpg" alt="Estudo digital 02"></a><a href="assets/gallery/06.jpg"><img src="assets/gallery/06.jpg" alt="Estudo digital 03"></a><a href="assets/gallery/08.gif"><img src="assets/gallery/08.gif" alt="Estudo autoral 02"></a><a href="assets/gallery/07.jpg"><img src="assets/gallery/07.jpg" alt="Estudo autoral 01"></a><a href="assets/gallery/09.jpg"><img src="assets/gallery/09.jpg" alt="Estudo autoral 03"></a><a href="assets/uploads/banner_cocada_zero-4adf644c-53ac-48d4-ac75-3fe61b425882.png"><img src="assets/uploads/banner_cocada_zero-4adf644c-53ac-48d4-ac75-3fe61b425882.png" alt="Cocada dos Sonhos"></a><a href="assets/uploads/flyer_mockup_fom_capivara-c28415d3-de1b-493a-971b-6700d41b57f5.png"><img src="assets/uploads/flyer_mockup_fom_capivara-c28415d3-de1b-493a-971b-6700d41b57f5.png" alt="FOM"></a><a href="assets/uploads/desktop__v2_izzo-4b770e54-d69b-4696-b221-6f1be5021def.png"><img src="assets/uploads/desktop__v2_izzo-4b770e54-d69b-4696-b221-6f1be5021def.png" alt="Elixir"></a><a href="assets/uploads/storie_i-9d4b28ae-7183-4dd9-8a07-533730617d8e.png"><img src="assets/uploads/storie_i-9d4b28ae-7183-4dd9-8a07-533730617d8e.png" alt="Elixir"></a><a href="assets/uploads/poster-2-43470eb1-db40-4959-b9a8-2e0b780b237d.png"><img src="assets/uploads/poster-2-43470eb1-db40-4959-b9a8-2e0b780b237d.png" alt="Timbra"></a><a href="assets/uploads/flyer_mockup-6c2311ee-eb63-4989-bca6-25870fec4b1e.png"><img src="assets/uploads/flyer_mockup-6c2311ee-eb63-4989-bca6-25870fec4b1e.png" alt="Timbra"></a><a href="assets/uploads/cross_folded_flyer_mockup_3-142d3e20-8b58-4e54-badc-ea2657d831dc.png"><img src="assets/uploads/cross_folded_flyer_mockup_3-142d3e20-8b58-4e54-badc-ea2657d831dc.png" alt="SG"></a><a href="assets/uploads/banner_winner_15-_desktop-c0924b37-8531-456c-8e5f-5a73fff3ec28.png"><img src="assets/uploads/banner_winner_15-_desktop-c0924b37-8531-456c-8e5f-5a73fff3ec28.png" alt="IZZO / Winner"></a><a href="assets/uploads/mes-das-criancas_entrega-no-mesmo-dia_banner_des-f52e7718-a774-4c4b-ad0d-2b5fd9a99b9b.png"><img src="assets/uploads/mes-das-criancas_entrega-no-mesmo-dia_banner_des-f52e7718-a774-4c4b-ad0d-2b5fd9a99b9b.png" alt="IZZO"></a><a href="assets/uploads/mes-das-criancas_v2_banner_desktop-d0a62403-6864-40ec-be65-d836c07ba896.png"><img src="assets/uploads/mes-das-criancas_v2_banner_desktop-d0a62403-6864-40ec-be65-d836c07ba896.png" alt="IZZO"></a><a href="assets/uploads/mes-das-criancas_banner_desktop-7010f939-a3e5-45d1-9651-7ac5b68bca93.png"><img src="assets/uploads/mes-das-criancas_banner_desktop-7010f939-a3e5-45d1-9651-7ac5b68bca93.png" alt="IZZO"></a><a href="assets/uploads/banner_kidzzo_15-_desktop-633ee0e3-c204-4452-a1f3-e2b499f36ed9.png"><img src="assets/uploads/banner_kidzzo_15-_desktop-633ee0e3-c204-4452-a1f3-e2b499f36ed9.png" alt="IZZO"></a><a href="assets/uploads/banner_dunlop_palhetas_desktop-e55a4734-3817-4310-8d86-0e92bac27227.png"><img src="assets/uploads/banner_dunlop_palhetas_desktop-e55a4734-3817-4310-8d86-0e92bac27227.png" alt="IZZO / DUNLOP"></a><a href="assets/uploads/email_ernie-ball_cordas-07955d4a-76b6-407d-a466-c36b98329c49.png"><img src="assets/uploads/email_ernie-ball_cordas-07955d4a-76b6-407d-a466-c36b98329c49.png" alt="IZZO / ERNIE BALL"></a><a href="assets/uploads/capa_warner-be5c75a6-7450-4a5a-80b0-9e5dbf6318b0.png"><img src="assets/uploads/capa_warner-be5c75a6-7450-4a5a-80b0-9e5dbf6318b0.png" alt="XERYUS / WARNER"></a><a href="assets/uploads/quiksilver_v5a-e5a2af5a-5936-408b-ac8d-2a534c2ba82c.png"><img src="assets/uploads/quiksilver_v5a-e5a2af5a-5936-408b-ac8d-2a534c2ba82c.png" alt="XERYUS / QUILKSILVER"></a><a href="assets/uploads/fogo1-55c14a60-ad27-4fdb-9383-2f452122e862.jpg"><img src="assets/uploads/fogo1-55c14a60-ad27-4fdb-9383-2f452122e862.jpg" alt="Natureza"></a><a href="assets/uploads/mockup_trem_v3-3410607f-3bea-438d-869d-580c8a0df0a4.jpg"><img src="assets/uploads/mockup_trem_v3-3410607f-3bea-438d-869d-580c8a0df0a4.jpg" alt="Mockup Trem V3"></a><a href="assets/uploads/mockup_feed_v2-6ade7b58-10fb-4e54-894e-0f275b6b3b17.png"><img src="assets/uploads/mockup_feed_v2-6ade7b58-10fb-4e54-894e-0f275b6b3b17.png" alt="Mockup feed V2"></a><a href="assets/uploads/mockup_camiseta-manga-longa_sg02-1253d501-dd6a-4b0b-99cb-fa2aed0baa14.png"><img src="assets/uploads/mockup_camiseta-manga-longa_sg02-1253d501-dd6a-4b0b-99cb-fa2aed0baa14.png" alt="SG"></a></div></noscript>
+<noscript><div class="no-js-gallery"><h1>Projetos de Rafael San</h1><a href="assets/gallery/01.jpg"><img src="assets/gallery/01.jpg" alt="Estudo de marca 01"></a><a href="assets/gallery/02.jpg"><img src="assets/gallery/02.jpg" alt="Estudo de marca 02"></a><a href="assets/gallery/03.jpg"><img src="assets/gallery/03.jpg" alt="Estudo de marca 03"></a><a href="assets/gallery/04.jpg"><img src="assets/gallery/04.jpg" alt="Estudo digital 01"></a><a href="assets/gallery/05.jpg"><img src="assets/gallery/05.jpg" alt="Estudo digital 02"></a><a href="assets/gallery/06.jpg"><img src="assets/gallery/06.jpg" alt="Estudo digital 03"></a><a href="assets/gallery/07.jpg"><img src="assets/gallery/07.jpg" alt="Estudo autoral 01"></a><a href="assets/gallery/08.gif"><img src="assets/gallery/08.gif" alt="Estudo autoral 02"></a><a href="assets/gallery/09.jpg"><img src="assets/gallery/09.jpg" alt="Estudo autoral 03"></a></div></noscript>
 </body>
 </html>
 
