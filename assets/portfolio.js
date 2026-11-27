@@ -128,6 +128,7 @@
       sourceImage: null,
       sourceVisibility: '',
       origin: null,
+      historyClosing: false,
       mobile: window.SanResponsiveImage.isMobile(),
     };
 
@@ -238,7 +239,7 @@
         completePageIntro();
       }
       setMobileMenu(false);
-      if (lightbox.open) closeViewer({ immediate: true, restoreFocus: false });
+      if (lightbox.open) closeViewer({ immediate: true, restoreFocus: false, fromHistory: true });
       state.view = view;
       body.dataset.view = view;
       body.classList.toggle('panel-is-open', view !== 'projects');
@@ -273,7 +274,7 @@
     function navigateTo(view, { replace = false, focus = true } = {}) {
       const hash = view === 'about' ? '#eu' : view === 'contact' ? '#contato' : '#projetos';
       if (location.hash !== hash) {
-        history[replace ? 'replaceState' : 'pushState']({ sanView: view }, '', hash);
+        history[replace ? 'replaceState' : 'pushState']({ ...(history.state || {}), sanView: view, sanProject: null }, '', hash);
       }
       applyView(view, { focus });
     }
@@ -301,7 +302,19 @@
     $$('[data-placeholder]').forEach((link) => link.addEventListener('click', (event) => event.preventDefault()));
     const onHistory = () => {
       const view = viewFromHash();
-      if (view !== state.view || state.menuOpen || lightbox.open) applyView(view);
+      if (view !== state.view || state.menuOpen) applyView(view);
+      const projectId = history.state?.sanProject;
+      if (view === 'projects' && typeof projectId === 'string') {
+        const item = projects.find(project => String(project.id) === projectId);
+        if (item && !item.locked) {
+          if (!lightbox.open || lightbox.closing || String(lightbox.item?.id) !== projectId) {
+            openViewer(item, null, { fromHistory: true });
+          }
+          return;
+        }
+        history.replaceState({ ...(history.state || {}), sanProject: null }, '', location.href);
+      }
+      if (lightbox.open) closeViewer({ fromHistory: true, immediate: view !== 'projects' });
     };
     window.addEventListener('popstate', onHistory);
     window.addEventListener('hashchange', onHistory);
@@ -314,7 +327,6 @@
       if (label) {
         if (label.textContent !== text) label.textContent = text;
       } else {
-        // Preserve the directional SVG even while the HTML is being refreshed.
         const textNode = Array.from(hint.childNodes).find((node) => node.nodeType === Node.TEXT_NODE && node.textContent.trim());
         if (textNode) textNode.textContent = text;
       }
@@ -360,8 +372,7 @@
     function currentOrigin() {
       const origin = lightbox.origin;
       if (origin && origin.image && origin.image.isConnected) {
-        const source = origin.radius === 0 ? origin.image : origin.media || origin.image;
-        const refreshed = { ...origin, rect: source.getBoundingClientRect() };
+        const refreshed = { ...origin, rect: origin.image.getBoundingClientRect() };
         if (cardIsVisible(refreshed)) return refreshed;
       }
       return getCard(lightbox.item);
@@ -592,9 +603,15 @@
       updateViewerLabels();
     }
 
-    function openViewer(candidate, origin) {
+    function openViewer(candidate, origin, { fromHistory = false } = {}) {
       const item = resolveGalleryItem(candidate);
-      if (!item || !viewer || !viewerImage || state.view !== 'projects' || state.menuOpen) return;
+      if (!item || item.locked === true || !viewer || !viewerImage || state.view !== 'projects' || state.menuOpen) return;
+      if (lightbox.open && !lightbox.closing && String(lightbox.item?.id) === String(item.id)) return;
+      if (!fromHistory) {
+        const baseState = { ...(history.state || {}), sanView: 'projects', sanProject: null };
+        history.replaceState(baseState, '', location.href);
+        history.pushState({ ...baseState, sanProject: String(item.id) }, '', location.href);
+      }
       ++lightbox.token;
       const token = lightbox.token;
       cancelImageAnimation();
@@ -603,6 +620,7 @@
       lightbox.returnFocus = document.activeElement;
       lightbox.open = true;
       lightbox.closing = false;
+      lightbox.historyClosing = false;
       lightbox.origin = origin && origin.rect ? origin : getCard(item);
       setMobileMenu(false);
       viewer.hidden = false;
@@ -660,6 +678,7 @@
       viewer.setAttribute('aria-hidden', 'true');
       lightbox.open = false;
       lightbox.closing = false;
+      lightbox.historyClosing = false;
       body.classList.remove('lightbox-is-open');
       resetStage();
       syncGalleryAvailability();
@@ -670,12 +689,20 @@
         else focusWithoutScroll(galleryRoot);
       }
     }
-    function closeViewer({ immediate = false, restoreFocus = true } = {}) {
+    function closeViewer({ immediate = false, restoreFocus = true, fromHistory = false } = {}) {
       if (!lightbox.open || !viewer) return;
       if (lightbox.closing) {
         if (immediate) { ++lightbox.token; finishViewerClose(restoreFocus); }
         return;
       }
+      if (!fromHistory && history.state?.sanProject === String(lightbox.item?.id)) {
+        if (!lightbox.historyClosing) {
+          lightbox.historyClosing = true;
+          history.back();
+        }
+        return;
+      }
+      lightbox.historyClosing = false;
       setViewerDescriptionOpen(false);
       const token = ++lightbox.token;
       lightbox.closing = true;
@@ -873,7 +900,7 @@
           if (!response.ok || !result || (result.success !== true && result.success !== 'true')) {
             throw new Error('Submission rejected');
           }
-          showContactStatus('Mensagem enviada! Obrigado pelo contato.');
+          showContactStatus('Mensagem enviada!\nObrigado pelo contato.');
           contactForm.reset();
         } catch (error) {
           const text = error.name === 'AbortError'
@@ -902,7 +929,7 @@
         cursor.style.top = `${event.clientY}px`;
         cursor.classList.add('is-visible');
         const target = event.target instanceof Element ? event.target.closest('a, button, [role="button"]') : null;
-        cursor.classList.toggle('active', Boolean(target && !target.disabled && !target.closest('[inert]')));
+        cursor.classList.toggle('active', Boolean(target && !target.disabled && target.getAttribute('aria-disabled') !== 'true' && !target.closest('[inert]')));
       }, { passive: true });
       document.documentElement.addEventListener('pointerleave', () => cursor.classList.remove('is-visible', 'active'));
       window.addEventListener('blur', () => cursor.classList.remove('is-visible', 'active'));

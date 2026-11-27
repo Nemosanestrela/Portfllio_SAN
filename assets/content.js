@@ -160,6 +160,7 @@
         title,
         alt: plainText(item.alt, title),
         hidden: item.hidden === true,
+        locked: item.locked === true,
         width: dimension(item.width, 1080),
         height: dimension(item.height, 1340),
         ...optionalMobileImage(item.mobile),

@@ -264,7 +264,12 @@
       image.draggable = false;
       image.decoding = 'async';
       image.loading = this.mode === 'grid' ? 'lazy' : 'eager';
-      media.append(image);
+      const lockMessage = document.createElement('span');
+      lockMessage.className = 'card-lock-message';
+      lockMessage.setAttribute('aria-hidden', 'true');
+      lockMessage.hidden = true;
+      lockMessage.textContent = 'Em atualização';
+      media.append(image, lockMessage);
       const caption = document.createElement('span');
       caption.className = 'gallery-card-caption';
       caption.setAttribute('aria-hidden', 'true');
@@ -274,7 +279,7 @@
       title.className = 'card-title';
       caption.append(category, title);
       button.append(media, caption);
-      const card = { button, media, image, category, title, item: null, source: null, requestedSource: null, column: null, row: null, x: 0, y: 0, vx: 0, vy: 0, width: this.cardWidth, height: this.cardHeight, scale: 1, imageVersion: 0, rotation: 0, visible: false };
+      const card = { button, media, image, lockMessage, category, title, item: null, source: null, requestedSource: null, column: null, row: null, x: 0, y: 0, vx: 0, vy: 0, width: this.cardWidth, height: this.cardHeight, scale: 1, imageVersion: 0, rotation: 0, visible: false };
       this.cardRecords.set(button, card);
       if (item) {
         this._setCardItem(card, item);
@@ -290,16 +295,18 @@
       card.item = item;
       card.button.dataset.id = String(item.id);
       card.button.dataset.category = item.category || '';
-      card.button.setAttribute('aria-label', 'Ampliar ' + (item.title || item.categoryLabel || 'projeto'));
+      const locked = item.locked === true;
+      card.button.classList.toggle('is-locked', locked);
+      card.button.setAttribute('aria-label', (item.title || item.categoryLabel || 'Projeto') + (locked ? ' — em atualização' : ' — ampliar projeto'));
+      if (locked) card.button.setAttribute('aria-disabled', 'true');
+      else card.button.removeAttribute('aria-disabled');
+      card.lockMessage.hidden = !locked;
       const source = window.SanResponsiveImage.select(item);
       card.source = source.src;
       if (this.mode === 'grid') this._loadCardImage(card, source.src);
       card.image.alt = source.alt || item.title || 'Imagem do projeto';
       card.image.width = source.width || 1080;
       card.image.height = source.height || 1340;
-      // Keep the crop inside the available source pixels on dense screens.
-      card.image.style.maxWidth = source.width ? source.width / this.pixelRatio + 'px' : '';
-      card.image.style.maxHeight = source.height ? source.height / this.pixelRatio + 'px' : '';
       card.category.textContent = item.categoryLabel || item.category || '';
       card.title.textContent = item.title || '';
     }
@@ -572,15 +579,14 @@
         return;
       }
       const card = this.cardRecords.get(button);
-      if (!card || !card.item) return;
+      if (!card || !card.item || card.item.locked === true) return;
       this._markInteracted();
       this.onOpen(card.item, this._cardOrigin(card));
     }
 
     _cardOrigin(card) {
       const { button, image, media } = card;
-      const inset = image.offsetWidth < media.offsetWidth || image.offsetHeight < media.offsetHeight;
-      return { button, image, media, rect: image.getBoundingClientRect(), radius: inset ? 0 : undefined };
+      return { button, image, media, rect: image.getBoundingClientRect(), radius: parseFloat(getComputedStyle(image).borderTopLeftRadius) || 0 };
     }
 
     _onWheel(event) {
