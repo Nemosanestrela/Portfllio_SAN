@@ -68,6 +68,10 @@
       for (const [property, family] of Object.entries(fonts)) {
         root.style.setProperty(property, CSS.escape(family));
       }
+      for (const part of ['chrome','body','contact','marquee']) {
+        const scale=site[part+'Scale'];
+        root.style.setProperty('--'+part+'-scale', String(Number.isFinite(scale)&&scale>=50&&scale<=180?scale/100:1));
+      }
       root.classList.toggle('no-header-blur', site.headerBlur === false);
       root.classList.toggle('no-header-fade', site.headerFade === false);
       root.classList.toggle('no-footer-blur', site.footerBlur === false);
@@ -75,7 +79,18 @@
     }
     if (introMode === 'none') body.classList.add('has-instant-intro');
     const contactTitle = $('#contactTitle');
-    if (contactTitle && typeof site?.contactTitle === 'string') contactTitle.textContent = site.contactTitle;
+    if (contactTitle && typeof site?.contactTitle === 'string') {
+      const text=site.contactTitle, bold=/\*\*([\s\S]+?)\*\*/g;
+      const fragments=[];let offset=0,match;
+      while((match=bold.exec(text))){
+        fragments.push(document.createTextNode(text.slice(offset,match.index)));
+        const strong=document.createElement('strong');strong.textContent=match[1];fragments.push(strong);offset=bold.lastIndex;
+      }
+      fragments.push(document.createTextNode(text.slice(offset)));contactTitle.replaceChildren(...fragments);
+      const align=site.contactAlign||'center';
+      contactTitle.style.textAlign=align.startsWith('justify-')?'justify':align;
+      contactTitle.style.textAlignLast=align.startsWith('justify-')?align.slice(8):'auto';
+    }
     const footerSignature = $('#footerSignature');
     if (footerSignature && typeof site?.footerSignature === 'string') footerSignature.textContent = site.footerSignature;
     $$('[data-social-link]').forEach((link) => {
@@ -271,10 +286,31 @@
       const hash = window.location.hash.toLowerCase();
       return hash === '#eu' ? 'about' : hash === '#contato' ? 'contact' : 'projects';
     };
-    function navigateTo(view, { replace = false, focus = true } = {}) {
-      const hash = view === 'about' ? '#eu' : view === 'contact' ? '#contato' : '#projetos';
-      if (location.hash !== hash) {
-        history[replace ? 'replaceState' : 'pushState']({ ...(history.state || {}), sanView: view, sanProject: null }, '', hash);
+    const hashForView = view => view === 'about' ? '#eu' : view === 'contact' ? '#contato' : '#projetos';
+    const historyRoot = history.state?.sanHistory === 2 && typeof history.state.sanRoot === 'string'
+      ? history.state.sanRoot : crypto.randomUUID();
+    const historyEntry = (view, project = null) => ({
+      ...(history.state || {}), sanHistory: 2, sanRoot: historyRoot, sanView: view, sanProject: project,
+    });
+    const isHomeEntry = () => history.state?.sanHistory === 2 && history.state.sanRoot === historyRoot &&
+      history.state.sanView === 'projects' && !history.state.sanProject;
+    let pendingNavigation = null;
+
+    function navigateTo(view, { focus = true } = {}) {
+      if (pendingNavigation) {
+        pendingNavigation = { view, focus };
+        return;
+      }
+      if (!isHomeEntry() && (view === 'projects' || lightbox.open)) {
+        pendingNavigation = { view, focus };
+        setMobileMenu(false);
+        history.back();
+        return;
+      }
+      if (view !== state.view) {
+        // Keep one section above Home; visiting another section replaces that entry.
+        history[isHomeEntry() && view !== 'projects' ? 'pushState' : 'replaceState'](
+          historyEntry(view), '', hashForView(view));
       }
       applyView(view, { focus });
     }
@@ -301,6 +337,18 @@
     });
     $$('[data-placeholder]').forEach((link) => link.addEventListener('click', (event) => event.preventDefault()));
     const onHistory = () => {
+      if (history.state?.sanHistory !== 2 || history.state.sanRoot !== historyRoot) {
+        // Old internal entries must not bring a previous Contact page back above Home.
+        history.replaceState(historyEntry('projects'), '', hashForView('projects'));
+      }
+      if (pendingNavigation) {
+        const next = pendingNavigation;
+        pendingNavigation = null;
+        history.replaceState(historyEntry('projects'), '', hashForView('projects'));
+        applyView('projects', { focus: next.focus });
+        if (next.view !== 'projects') navigateTo(next.view, { focus: next.focus });
+        return;
+      }
       const view = viewFromHash();
       if (view !== state.view || state.menuOpen) applyView(view);
       const projectId = history.state?.sanProject;
@@ -312,7 +360,7 @@
           }
           return;
         }
-        history.replaceState({ ...(history.state || {}), sanProject: null }, '', location.href);
+        history.replaceState(historyEntry('projects'), '', hashForView('projects'));
       }
       if (lightbox.open) closeViewer({ fromHistory: true, immediate: view !== 'projects' });
     };
@@ -608,7 +656,7 @@
       if (!item || item.locked === true || !viewer || !viewerImage || state.view !== 'projects' || state.menuOpen) return;
       if (lightbox.open && !lightbox.closing && String(lightbox.item?.id) === String(item.id)) return;
       if (!fromHistory) {
-        const baseState = { ...(history.state || {}), sanView: 'projects', sanProject: null };
+        const baseState = historyEntry('projects');
         history.replaceState(baseState, '', location.href);
         history.pushState({ ...baseState, sanProject: String(item.id) }, '', location.href);
       }
@@ -1224,7 +1272,14 @@
       viewer.inert = true;
       viewer.setAttribute('aria-hidden', 'true');
     }
-    applyView(viewFromHash());
+    const initialView = viewFromHash();
+    if (history.state?.sanHistory === 2 && history.state.sanRoot === historyRoot && history.state.sanView === initialView) {
+      history.replaceState(historyEntry(initialView), '', hashForView(initialView));
+    } else {
+      history.replaceState(historyEntry('projects'), '', hashForView('projects'));
+      if (initialView !== 'projects') history.pushState(historyEntry(initialView), '', hashForView(initialView));
+    }
+    applyView(initialView);
     updateGalleryHint();
     startPageIntro();
   };

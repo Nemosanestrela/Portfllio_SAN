@@ -1,66 +1,7 @@
 {
   "version": 1,
-  "revision": "2026-11-27T20:39:15.527Z-1796efdd",
+  "revision": "2026-11-28T12:12:19.042Z-7e557bd7",
   "projects": [
-    {
-      "id": "brand-01",
-      "src": "assets/gallery/01.jpg",
-      "alt": "Estudo de identidade visual 01",
-      "width": 1400,
-      "height": 1867,
-      "category": "brand",
-      "categoryLabel": "Brand",
-      "title": "Estudo de marca 01",
-      "hidden": false,
-      "locked": true,
-      "images": [
-        {
-          "src": "assets/uploads/banner-kv-002d8e2d-c29c-4fba-8c70-79c779efb5bf.png",
-          "alt": "",
-          "width": 2560,
-          "height": 909
-        }
-      ]
-    },
-    {
-      "id": "brand-02",
-      "src": "assets/gallery/02.jpg",
-      "alt": "Estudo de identidade visual 02",
-      "width": 1920,
-      "height": 1280,
-      "category": "brand",
-      "categoryLabel": "Brand",
-      "title": "Estudo de marca 02",
-      "hidden": false,
-      "locked": true,
-      "images": []
-    },
-    {
-      "id": "brand-03",
-      "src": "assets/gallery/03.jpg",
-      "alt": "Estudo de identidade visual 03",
-      "width": 1920,
-      "height": 1280,
-      "category": "brand",
-      "categoryLabel": "Brand",
-      "title": "Estudo de marca 03",
-      "hidden": false,
-      "locked": true,
-      "images": []
-    },
-    {
-      "id": "ecommerce-01",
-      "src": "assets/gallery/04.jpg",
-      "alt": "Estudo digital 01",
-      "width": 1920,
-      "height": 1280,
-      "category": "ecommerce",
-      "categoryLabel": "E-commerce",
-      "title": "Estudo digital 01",
-      "hidden": false,
-      "locked": true,
-      "images": []
-    },
     {
       "id": "ecommerce-02",
       "src": "assets/gallery/05.jpg",
@@ -75,16 +16,42 @@
       "images": []
     },
     {
-      "id": "ecommerce-03",
-      "src": "assets/gallery/06.jpg",
-      "alt": "Estudo digital 03",
-      "width": 1920,
-      "height": 1280,
-      "category": "ecommerce",
-      "categoryLabel": "E-commerce",
-      "title": "Estudo digital 03",
+      "id": "project-171565df-b3da-44c1-9eb0-815062a320df",
+      "src": "assets/uploads/cross_folded_flyer_mockup_3-142d3e20-8b58-4e54-badc-ea2657d831dc.png",
+      "alt": "Embalagem SG Nickel",
+      "width": 4000,
+      "height": 3000,
+      "category": "illustration",
+      "categoryLabel": "Ilustração",
+      "title": "SG",
       "hidden": false,
-      "locked": true,
+      "locked": false,
+      "images": [
+        {
+          "src": "assets/uploads/wallpaper-timbra-414fac1d-c03b-4015-9d1e-11fa1daa01c6.png",
+          "alt": "",
+          "width": 1920,
+          "height": 1080,
+          "mobile": {
+            "src": "assets/uploads/wallpaper-cb12ba92-f39e-43fb-9c08-d75ae17c2e1f.png",
+            "alt": "",
+            "width": 1672,
+            "height": 941
+          }
+        }
+      ]
+    },
+    {
+      "id": "project-110daf2e-42e4-4a26-b5b9-89892c29bf9f",
+      "src": "assets/uploads/flyer_mockup_fom_capivara-c28415d3-de1b-493a-971b-6700d41b57f5.png",
+      "alt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "width": 4000,
+      "height": 3000,
+      "category": "brand",
+      "categoryLabel": "Brand",
+      "title": "FOM",
+      "hidden": false,
+      "locked": false,
       "images": []
     },
     {
@@ -98,33 +65,20 @@
       "title": "Estudo autoral 02",
       "hidden": false,
       "locked": true,
-      "images": []
-    },
-    {
-      "id": "illustration-01",
-      "src": "assets/gallery/07.jpg",
-      "alt": "Estudo autoral 01",
-      "width": 1200,
-      "height": 1800,
-      "category": "illustration",
-      "categoryLabel": "Ilustração",
-      "title": "Estudo autoral 01",
-      "hidden": false,
-      "locked": true,
-      "images": []
-    },
-    {
-      "id": "illustration-03",
-      "src": "assets/gallery/09.jpg",
-      "alt": "Estudo autoral 03",
-      "width": 1920,
-      "height": 1280,
-      "category": "illustration",
-      "categoryLabel": "Ilustração",
-      "title": "Estudo autoral 03",
-      "hidden": false,
-      "locked": true,
-      "images": []
+      "images": [
+        {
+          "src": "assets/uploads/wallpaper-timbra-48d6a878-84a2-4ee5-8dcc-9d3586d79881.png",
+          "alt": "",
+          "width": 1920,
+          "height": 1080
+        },
+        {
+          "src": "assets/uploads/wallpaper-timbra-6d26a4a5-b446-4f63-b1d2-e61b7d8d9423.png",
+          "alt": "",
+          "width": 1920,
+          "height": 1080
+        }
+      ]
     },
     {
       "id": "project-d4a3fde0-f969-40e7-b087-6638bc8ea9c3",
@@ -152,8 +106,8 @@
       "alt": "Banner para sitescc",
       "width": 2560,
       "height": 906,
-      "category": "ecommerce",
-      "categoryLabel": "E-commerce",
+      "category": "brand",
+      "categoryLabel": "Brand",
       "title": "Cocada dos Sonhos",
       "hidden": false,
       "locked": false,
@@ -167,29 +121,29 @@
       ]
     },
     {
-      "id": "project-110daf2e-42e4-4a26-b5b9-89892c29bf9f",
-      "src": "assets/uploads/flyer_mockup_fom_capivara-c28415d3-de1b-493a-971b-6700d41b57f5.png",
-      "alt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "width": 4000,
-      "height": 3000,
-      "category": "brand",
-      "categoryLabel": "Brand",
-      "title": "FOM",
+      "id": "project-505c6f7b-6078-43d2-8b5f-b4047490f186",
+      "src": "assets/uploads/banner_dunlop_palhetas_desktop-e55a4734-3817-4310-8d86-0e92bac27227.png",
+      "alt": "Palhetas DUNLOP",
+      "width": 1920,
+      "height": 550,
+      "category": "ecommerce",
+      "categoryLabel": "E-commerce",
+      "title": "IZZO / DUNLOP",
       "hidden": false,
       "locked": false,
       "images": []
     },
     {
-      "id": "project-0709f4fb-ea5c-4edb-bb33-d83dd3c53a9b",
-      "src": "assets/uploads/desktop__v2_izzo-4b770e54-d69b-4696-b221-6f1be5021def.png",
-      "alt": "Banner sitecdsvvf fdv",
-      "width": 2560,
-      "height": 906,
-      "category": "ecommerce",
-      "categoryLabel": "E-commerce",
-      "title": "Elixir",
+      "id": "illustration-01",
+      "src": "assets/gallery/07.jpg",
+      "alt": "Estudo autoral 01",
+      "width": 1200,
+      "height": 1800,
+      "category": "illustration",
+      "categoryLabel": "Ilustração",
+      "title": "Estudo autoral 01",
       "hidden": false,
-      "locked": false,
+      "locked": true,
       "images": []
     },
     {
@@ -203,6 +157,19 @@
       "title": "Elixir",
       "hidden": false,
       "locked": false,
+      "images": []
+    },
+    {
+      "id": "brand-02",
+      "src": "assets/gallery/02.jpg",
+      "alt": "Estudo de identidade visual 02",
+      "width": 1920,
+      "height": 1280,
+      "category": "ecommerce",
+      "categoryLabel": "E-commerce",
+      "title": "Estudo de marca 02",
+      "hidden": false,
+      "locked": true,
       "images": []
     },
     {
@@ -232,19 +199,6 @@
       "images": []
     },
     {
-      "id": "project-171565df-b3da-44c1-9eb0-815062a320df",
-      "src": "assets/uploads/cross_folded_flyer_mockup_3-142d3e20-8b58-4e54-badc-ea2657d831dc.png",
-      "alt": "Embalagem SG Nickel",
-      "width": 4000,
-      "height": 3000,
-      "category": "brand",
-      "categoryLabel": "Brand",
-      "title": "SG",
-      "hidden": false,
-      "locked": false,
-      "images": []
-    },
-    {
       "id": "project-fc02ad85-2587-41af-870d-bb3f04524b1a",
       "src": "assets/uploads/banner_winner_15-_desktop-c0924b37-8531-456c-8e5f-5a73fff3ec28.png",
       "alt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -258,6 +212,19 @@
       "images": []
     },
     {
+      "id": "ecommerce-03",
+      "src": "assets/gallery/06.jpg",
+      "alt": "Estudo digital 03",
+      "width": 1920,
+      "height": 1280,
+      "category": "ecommerce",
+      "categoryLabel": "E-commerce",
+      "title": "Estudo digital 03",
+      "hidden": false,
+      "locked": true,
+      "images": []
+    },
+    {
       "id": "project-20a96908-bb22-4349-a6ac-d4c1f9386c9f",
       "src": "assets/uploads/mes-das-criancas_entrega-no-mesmo-dia_banner_des-f52e7718-a774-4c4b-ad0d-2b5fd9a99b9b.png",
       "alt": "Mês das crianças Entrega no mesmo dia Banner Desktop",
@@ -266,6 +233,19 @@
       "category": "ecommerce",
       "categoryLabel": "E-commerce",
       "title": "IZZO",
+      "hidden": false,
+      "locked": false,
+      "images": []
+    },
+    {
+      "id": "brand-03",
+      "src": "assets/gallery/03.jpg",
+      "alt": "Estudo de identidade visual 03",
+      "width": 1920,
+      "height": 1280,
+      "category": "brand",
+      "categoryLabel": "Brand",
+      "title": "Estudo de marca 03",
       "hidden": false,
       "locked": false,
       "images": []
@@ -305,19 +285,6 @@
       "category": "ecommerce",
       "categoryLabel": "E-commerce",
       "title": "IZZO",
-      "hidden": false,
-      "locked": false,
-      "images": []
-    },
-    {
-      "id": "project-505c6f7b-6078-43d2-8b5f-b4047490f186",
-      "src": "assets/uploads/banner_dunlop_palhetas_desktop-e55a4734-3817-4310-8d86-0e92bac27227.png",
-      "alt": "Palhetas DUNLOP",
-      "width": 1920,
-      "height": 550,
-      "category": "ecommerce",
-      "categoryLabel": "E-commerce",
-      "title": "IZZO / DUNLOP",
       "hidden": false,
       "locked": false,
       "images": []
@@ -375,14 +342,14 @@
       "images": []
     },
     {
-      "id": "project-28d92337-91a7-41ba-90f9-1206ace3b7c0",
-      "src": "assets/uploads/mockup_trem_v3-3410607f-3bea-438d-869d-580c8a0df0a4.jpg",
-      "alt": "Mockup Trem V3",
-      "width": 4500,
-      "height": 3000,
-      "category": "brand",
-      "categoryLabel": "Brand",
-      "title": "Mockup Trem V3",
+      "id": "project-0709f4fb-ea5c-4edb-bb33-d83dd3c53a9b",
+      "src": "assets/uploads/desktop__v2_izzo-4b770e54-d69b-4696-b221-6f1be5021def.png",
+      "alt": "Banner sitecdsvvf fdv",
+      "width": 2560,
+      "height": 906,
+      "category": "ecommerce",
+      "categoryLabel": "E-commerce",
+      "title": "Elixir",
       "hidden": false,
       "locked": false,
       "images": []
@@ -412,10 +379,36 @@
       "hidden": false,
       "locked": false,
       "images": []
+    },
+    {
+      "id": "project-c09a369c-c837-403b-a27b-f03f2f3120b2",
+      "src": "assets/uploads/wallpaper-timbra-50d8f30b-a026-4fbd-8685-54c999770160.png",
+      "alt": "Wallpaper Timbra",
+      "width": 1920,
+      "height": 1080,
+      "category": "brand",
+      "categoryLabel": "Brand",
+      "title": "Wallpaper Timbra",
+      "hidden": false,
+      "locked": false,
+      "images": []
+    },
+    {
+      "id": "illustration-03",
+      "src": "assets/gallery/09.jpg",
+      "alt": "Estudo autoral 03",
+      "width": 1920,
+      "height": 1280,
+      "category": "illustration",
+      "categoryLabel": "Ilustração",
+      "title": "Estudo autoral 03",
+      "hidden": false,
+      "locked": true,
+      "images": []
     }
   ],
   "about": {
-    "firstText": "Sou designer gráfico e ilustrador, curioso por natureza e apaixonado por tudo aquilo que envolve criatividade, expressão e novas formas de enxergar o mundo.\n\nGosto de explorar ideias, experimentar caminhos e encontrar novos significados. Para mim, criar é um processo de descoberta, uma maneira de traduzir pensamentos, referências e experiências em algo visual.",
+    "firstText": "Sou designer gráfico e ilustrador, curioso por natureza e apaixonado por tudo aquilo que envolve criatividade, expressão e novas formas de enxergar o mundo.\n\nGosto de explorar ideias, experimentar caminhos e encontrar novos significados. Pa**texto**ra mim, criar é um processo de descoberta, uma maneira de traduzir pensamentos, referências e experiências em algo visual.",
     "lastText": "Minha trajetória sempre esteve conectada à arte, ao design e à ilustração. Entre diferentes projetos, linguagens e processos criativos, fui descobrindo novas maneiras de me expressar e ampliando meu olhar sobre o que é possível criar.\n\nGosto de pensar que meu trabalho é um reflexo desse percurso: uma mistura de experiências, influências e um desejo constante de continuar explorando o novo.",
     "firstName": "RAFAEL",
     "lastName": "SAN",
@@ -425,8 +418,10 @@
       "width": 1932,
       "height": 1179
     },
-    "firstUnderline": "apaixonado por tudo aquilo que envolve criatividade, expressão e novas formas de enxergar o mundo",
-    "lastUnderline": "uma mistura de experiências, influências e um desejo constante de continuar explorando o novo"
+    "firstUnderline": "",
+    "lastUnderline": "uma mistura de experiências, influências e um desejo constante de continuar explorando o novo",
+    "firstAlign": "justify-right",
+    "lastAlign": "default"
   },
   "site": {
     "accent": "#1106ec",
@@ -439,15 +434,21 @@
     "bodyFont": "Inter",
     "contactFont": "Anton",
     "marqueeFont": "Inter",
+    "chromeScale": 100,
+    "bodyScale": 100,
+    "contactScale": 100,
+    "marqueeScale": 100,
     "headerBlur": true,
     "headerFade": true,
     "footerBlur": true,
     "footerFade": true,
     "intro": "swarm",
-    "textSpeed": "normal",
+    "textSpeed": "slow",
     "galleryMode": "free",
-    "featuredProjectId": "project-d4a3fde0-f969-40e7-b087-6638bc8ea9c3",
+    "featuredProjectId": null,
     "contactTitle": "TEM ALGUM PROJETO LEGAL?\nME MANDA UM OI!",
+    "contactAlign": "center",
+    "contactUnderline": "M ALGUM PROJETO LEGAL? ME MANDA UM OI!",
     "instagram": "https://www.instagram.com/nemosanestrela",
     "behance": "https://www.instagram.com/nemosanestrela",
     "footerSignature": "©SAN 2026"

@@ -61,6 +61,7 @@
     const choice = (key, allowed) => allowed.includes(value[key]) ? value[key] : defaults[key];
     const color = (key) => typeof value[key] === 'string' && /^#[a-f0-9]{6}$/i.test(value[key]) ? value[key] : defaults[key];
     const toggle = (key) => typeof value[key] === 'boolean' ? value[key] : defaults[key];
+    const scale = key => Number.isFinite(value[key]) && value[key]>=50 && value[key]<=180 ? value[key] : defaults[key];
     const fontLibrary = normalizeFontLibrary(value.fontLibrary);
     const fontChoices = [...fonts, ...fontLibrary.map((font) => font.id)];
     return {
@@ -73,6 +74,10 @@
       bodyFont: choice('bodyFont', fontChoices),
       contactFont: choice('contactFont', fontChoices),
       marqueeFont: choice('marqueeFont', fontChoices),
+      chromeScale: scale('chromeScale'),
+      bodyScale: scale('bodyScale'),
+      contactScale: scale('contactScale'),
+      marqueeScale: scale('marqueeScale'),
       fontLibrary,
       headerBlur: toggle('headerBlur'),
       headerFade: toggle('headerFade'),
@@ -83,6 +88,8 @@
       galleryMode: choice('galleryMode', ['free', 'grid']),
       featuredProjectId: ids.has(value.featuredProjectId) ? value.featuredProjectId : null,
       contactTitle: plainText(value.contactTitle).trim().slice(0, limits.contactTitle) || defaults.contactTitle,
+      contactAlign: choice('contactAlign', ['left','center','right','justify-left','justify-right']),
+      contactUnderline: plainText(value.contactUnderline, defaults.contactUnderline).trim().slice(0, limits.contactTitle),
       instagram: safeSocialLink(value.instagram, defaults.instagram),
       behance: safeSocialLink(value.behance, defaults.behance),
       footerSignature: plainText(value.footerSignature, defaults.footerSignature).trim().slice(0, limits.footerSignature),
@@ -188,6 +195,8 @@
         lastName: plainText(value.about.lastName, 'SAN'),
         firstUnderline: plainText(value.about.firstUnderline, underlines.firstUnderline).slice(0, limits.underline),
         lastUnderline: plainText(value.about.lastUnderline, underlines.lastUnderline).slice(0, limits.underline),
+        firstAlign: ['left','center','right','justify-left','justify-right'].includes(value.about.firstAlign) ? value.about.firstAlign : 'default',
+        lastAlign: ['left','center','right','justify-left','justify-right'].includes(value.about.lastAlign) ? value.about.lastAlign : 'default',
         photo: {
           src: localImageSource(value.about.photo.src),
           alt: plainText(value.about.photo.alt),
@@ -232,6 +241,12 @@
     window.SAN_CONTENT_REVISION = content.revision;
     replaceCopy('.about-copy-first', content.about.firstText);
     replaceCopy('.about-copy-last', content.about.lastText);
+    for (const part of ['first','last']) {
+      const block=document.querySelector('.about-copy-'+part), align=content.about[part+'Align'];
+      if (!block || align==='default') continue;
+      block.style.textAlign=align.startsWith('justify-')?'justify':align;
+      block.style.textAlignLast=align.startsWith('justify-')?align.slice(8):'auto';
+    }
     document.querySelectorAll('.about-marquee-group').forEach((group) => {
       const firstName = group.querySelector('span.about-marquee-word');
       const lastName = group.querySelector('strong.about-marquee-word');

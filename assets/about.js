@@ -730,7 +730,7 @@
       family: siteSettings?.fontFamily?.(site?.contactFont, site?.fontLibrary) || 'Anton',
       controller: 'sanContactTitleReveal',
       revealScale,
-      phrases: ['me manda um oi'],
+      phrases: [site?.contactUnderline ?? siteSettings?.defaults.contactUnderline ?? 'me manda um oi'],
     });
   }
 
