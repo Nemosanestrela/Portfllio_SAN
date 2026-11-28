@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "revision": "2026-11-28T15:02:50.335Z-03aeafe7",
+  "revision": "2026-11-28T15:03:08.786Z-fd9285cd",
   "projects": [
     {
       "id": "ecommerce-02",
@@ -514,7 +514,7 @@
     "intro": "swarm",
     "textSpeed": "slow",
     "galleryMode": "free",
-    "featuredProjectId": null,
+    "featuredProjectId": "project-d4a3fde0-f969-40e7-b087-6638bc8ea9c3",
     "contactTitle": "TEM ALGUM PROJETO LEGAL?\nME MANDA UM OI!",
     "contactAlign": "center",
     "contactUnderline": "ME MANDA UM OI",
