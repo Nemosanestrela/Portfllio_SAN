@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "revision": "2026-11-28T15:00:14.665Z-44132246",
+  "revision": "2026-11-28T15:02:50.335Z-03aeafe7",
   "projects": [
     {
       "id": "ecommerce-02",
@@ -431,7 +431,7 @@
         "end": 360
       }
     ],
-    "lastAlign": "center",
+    "lastAlign": "right",
     "lastUnderlineRanges": [
       {
         "start": 298,
