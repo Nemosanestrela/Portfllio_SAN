@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "revision": "2026-11-28T12:12:19.042Z-7e557bd7",
+  "revision": "2026-11-28T15:00:14.665Z-44132246",
   "projects": [
     {
       "id": "ecommerce-02",
@@ -13,6 +13,19 @@
       "title": "Estudo digital 02",
       "hidden": false,
       "locked": true,
+      "images": []
+    },
+    {
+      "id": "project-110daf2e-42e4-4a26-b5b9-89892c29bf9f",
+      "src": "assets/uploads/flyer_mockup_fom_capivara-c28415d3-de1b-493a-971b-6700d41b57f5.png",
+      "alt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "width": 4000,
+      "height": 3000,
+      "category": "brand",
+      "categoryLabel": "Brand",
+      "title": "FOM",
+      "hidden": false,
+      "locked": false,
       "images": []
     },
     {
@@ -40,19 +53,6 @@
           }
         }
       ]
-    },
-    {
-      "id": "project-110daf2e-42e4-4a26-b5b9-89892c29bf9f",
-      "src": "assets/uploads/flyer_mockup_fom_capivara-c28415d3-de1b-493a-971b-6700d41b57f5.png",
-      "alt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "width": 4000,
-      "height": 3000,
-      "category": "brand",
-      "categoryLabel": "Brand",
-      "title": "FOM",
-      "hidden": false,
-      "locked": false,
-      "images": []
     },
     {
       "id": "illustration-02",
@@ -408,7 +408,7 @@
     }
   ],
   "about": {
-    "firstText": "Sou designer gráfico e ilustrador, curioso por natureza e apaixonado por tudo aquilo que envolve criatividade, expressão e novas formas de enxergar o mundo.\n\nGosto de explorar ideias, experimentar caminhos e encontrar novos significados. Pa**texto**ra mim, criar é um processo de descoberta, uma maneira de traduzir pensamentos, referências e experiências em algo visual.",
+    "firstText": "Sou designer gráfico e ilustrador, curioso por natureza e apaixonado por tudo aquilo que envolve criatividade, expressão e novas formas de enxergar o mundo.\n\nGosto de explorar ideias, experimentar caminhos e encontrar novos significados. Pra mim, criar é um processo de descoberta, uma maneira de traduzir pensamentos, referências e experiências em algo visual.",
     "lastText": "Minha trajetória sempre esteve conectada à arte, ao design e à ilustração. Entre diferentes projetos, linguagens e processos criativos, fui descobrindo novas maneiras de me expressar e ampliando meu olhar sobre o que é possível criar.\n\nGosto de pensar que meu trabalho é um reflexo desse percurso: uma mistura de experiências, influências e um desejo constante de continuar explorando o novo.",
     "firstName": "RAFAEL",
     "lastName": "SAN",
@@ -418,13 +418,82 @@
       "width": 1932,
       "height": 1179
     },
-    "firstUnderline": "",
+    "firstUnderline": "uma maneira de traduzir pensamentos",
     "lastUnderline": "uma mistura de experiências, influências e um desejo constante de continuar explorando o novo",
-    "firstAlign": "justify-right",
-    "lastAlign": "default"
+    "firstAlign": "left",
+    "firstUnderlineRanges": [
+      {
+        "start": 282,
+        "end": 317
+      },
+      {
+        "start": 319,
+        "end": 360
+      }
+    ],
+    "lastAlign": "center",
+    "lastUnderlineRanges": [
+      {
+        "start": 298,
+        "end": 391
+      }
+    ]
   },
   "site": {
     "accent": "#1106ec",
+    "typography": {
+      "desktop": {
+        "chrome": {
+          "lineHeight": 100,
+          "letterSpacing": 0,
+          "fontWeight": null
+        },
+        "body": {
+          "lineHeight": 100,
+          "letterSpacing": 0,
+          "fontWeight": null
+        },
+        "contact": {
+          "lineHeight": 100,
+          "letterSpacing": 0,
+          "fontWeight": null
+        },
+        "marquee": {
+          "lineHeight": 100,
+          "letterSpacing": 0,
+          "fontWeight": null
+        }
+      },
+      "mobile": {
+        "chrome": {
+          "lineHeight": 100,
+          "letterSpacing": 0,
+          "fontWeight": null
+        },
+        "body": {
+          "lineHeight": 100,
+          "letterSpacing": 0,
+          "fontWeight": null
+        },
+        "contact": {
+          "lineHeight": 100,
+          "letterSpacing": 0,
+          "fontWeight": null
+        },
+        "marquee": {
+          "lineHeight": 100,
+          "letterSpacing": 0,
+          "fontWeight": null
+        }
+      }
+    },
+    "lab": {
+      "enabled": false,
+      "margins": 100,
+      "spacing": 100,
+      "coverSize": 100,
+      "radius": 24
+    },
     "bodyColor": null,
     "chromeColor": "#ffffff",
     "contactColor": "#ffffff",
@@ -448,7 +517,13 @@
     "featuredProjectId": null,
     "contactTitle": "TEM ALGUM PROJETO LEGAL?\nME MANDA UM OI!",
     "contactAlign": "center",
-    "contactUnderline": "M ALGUM PROJETO LEGAL? ME MANDA UM OI!",
+    "contactUnderline": "ME MANDA UM OI",
+    "contactUnderlineRanges": [
+      {
+        "start": 25,
+        "end": 39
+      }
+    ],
     "instagram": "https://www.instagram.com/nemosanestrela",
     "behance": "https://www.instagram.com/nemosanestrela",
     "footerSignature": "©SAN 2026"

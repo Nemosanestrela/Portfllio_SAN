@@ -19,6 +19,7 @@
       if (!(root instanceof HTMLElement)) throw new TypeError('A galeria precisa de um elemento raiz.');
       const settings = options || {};
       this.root = root;
+      this.desktopLab = window.SanSiteSettings?.normalizeLab(settings.lab);
       this.plane = root.querySelector('#galleryPlane');
       if (!this.plane) {
         this.plane = document.createElement('div');
@@ -91,6 +92,12 @@
       this.resizeObserver.observe(this.root);
       this._layout(true);
       queueMicrotask(() => { if (!this.destroyed) this._notify(); });
+    }
+
+    setDesktopLab(value) {
+      const next=window.SanSiteSettings?.normalizeLab(value),previous=this.desktopLab;
+      this.desktopLab=next;
+      if(this.width>768&&(previous?.enabled!==next?.enabled||previous?.coverSize!==next?.coverSize||previous?.spacing!==next?.spacing))this._layout(true);
     }
 
     setCategory(value) {
@@ -229,6 +236,12 @@
       this.cardHeight = this.cardWidth * 1340 / 1080 + 42;
       this.gapX = width < 600 ? 121.6 : 224;
       this.gapY = width < 600 ? 115.2 : 179.2;
+      if(width>768&&this.desktopLab?.enabled){
+        this.cardWidth*=this.desktopLab.coverSize/100;
+        this.cardHeight=this.cardWidth*1340/1080+42;
+        this.gapX*=this.desktopLab.spacing/100;
+        this.gapY*=this.desktopLab.spacing/100;
+      }
       this.spacingX = this.cardWidth + this.gapX;
       this.spacingY = this.cardHeight + this.gapY;
       this.columns = Math.ceil(width / this.spacingX) + 4;

@@ -72,6 +72,8 @@
         const scale=site[part+'Scale'];
         root.style.setProperty('--'+part+'-scale', String(Number.isFinite(scale)&&scale>=50&&scale<=180?scale/100:1));
       }
+      window.sanResponsiveTypography?.destroy();window.sanResponsiveTypography=siteSettings.applyTypography(site.typography);
+      siteSettings.applyDesktopLab(site.lab);
       root.classList.toggle('no-header-blur', site.headerBlur === false);
       root.classList.toggle('no-header-fade', site.headerFade === false);
       root.classList.toggle('no-footer-blur', site.footerBlur === false);
@@ -1259,6 +1261,7 @@
       gallery = new window.SanGallery(galleryRoot, {
         items: projects,
         initialMode: state.mode,
+        lab:settings.lab,
         featuredProjectId: settings.featuredProjectId,
         onOpen: openViewer,
         onChange: onGalleryChange,

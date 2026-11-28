@@ -330,6 +330,9 @@
       start = match.index;
       end = start + match[0].length;
     }
+    return getOffsetRange(paragraph,start,end);
+  }
+  function getOffsetRange(paragraph,start,end){
     const walker = document.createTreeWalker(paragraph, NodeFilter.SHOW_TEXT);
     const range = document.createRange();
     let offset = 0;
@@ -345,7 +348,7 @@
     return null;
   }
 
-  function drawPhraseUnderline(paragraph, range, animated, isContactHeading) {
+  function drawPhraseUnderline(paragraph, range, animated, isContactHeading,initialDelay=0) {
     const origin = paragraph.getBoundingClientRect();
     const style = getComputedStyle(paragraph);
     const lineHeight = parseFloat(style.lineHeight);
@@ -378,7 +381,7 @@
 
     const segments = Array.from(rows.entries()).sort(([a], [b]) => a - b).map(([, segment]) => segment);
     const totalWidth = segments.reduce((width, segment) => width + segment.right - segment.left, 0);
-    let delay = isContactHeading ? 240 : 0;
+    let delay = initialDelay+(isContactHeading&&initialDelay===0?240:0);
     for (const { left, right, bottom } of segments) {
       const width = right - left;
       const duration = 1050 * width / totalWidth;
@@ -399,7 +402,7 @@
     return delay;
   }
 
-  function initCopyReveal({ panelId, selector, family, controller, revealScale, phrases = [] }) {
+  function initCopyReveal({ panelId, selector, family, controller, revealScale, phrases = [],rangeSets=[],rawTexts=[] }) {
     const panel = document.getElementById(panelId);
     if (!panel || window[controller]) return;
     const blocks = Array.from(panel.querySelectorAll(selector));
@@ -459,11 +462,15 @@
 
     function drawUnderline(block, animated) {
       if (!visitOpen || !block.classList.contains('is-copy-visible')) return;
-      const phrase = phrases[blocks.indexOf(block)];
+      const index=blocks.indexOf(block),phrase=phrases[index],isContactHeading=block.matches('.contact-title');
       block.querySelectorAll('.about-underline').forEach((stroke) => stroke.remove());
       let underlineDuration = 0;
-      if (phrase) {
-        const isContactHeading = block.matches('.contact-title');
+      if(Array.isArray(rangeSets[index])){
+        const elements=isContactHeading?[block]:Array.from(block.querySelectorAll('p'));
+        for(const segment of window.SanSiteSettings.textFormatting.renderedRanges(rawTexts[index]||'',rangeSets[index],isContactHeading)){
+          const paragraph=elements[segment.paragraph];if(!paragraph)continue;const range=getOffsetRange(paragraph,segment.start,segment.end);if(range)underlineDuration=drawPhraseUnderline(paragraph,range,animated,isContactHeading,animated?underlineDuration:0);
+        }
+      }else if (phrase) {
         const textElements = isContactHeading ? [block] : block.querySelectorAll('p');
         for (const paragraph of textElements) {
           const range = getPhraseRange(paragraph, phrase, isContactHeading);
@@ -723,6 +730,7 @@
         about?.firstUnderline ?? underlines?.firstUnderline,
         about?.lastUnderline ?? underlines?.lastUnderline,
       ],
+      rangeSets:[about?.firstUnderlineRanges,about?.lastUnderlineRanges],rawTexts:[about?.firstText,about?.lastText],
     });
     initCopyReveal({
       panelId: 'contactPanel',
@@ -731,6 +739,7 @@
       controller: 'sanContactTitleReveal',
       revealScale,
       phrases: [site?.contactUnderline ?? siteSettings?.defaults.contactUnderline ?? 'me manda um oi'],
+      rangeSets:[site?.contactUnderlineRanges],rawTexts:[site?.contactTitle],
     });
   }
 

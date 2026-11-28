@@ -66,6 +66,8 @@
     const fontChoices = [...fonts, ...fontLibrary.map((font) => font.id)];
     return {
       accent: color('accent'),
+      typography:window.SanSiteSettings.normalizeTypography(value.typography),
+      lab:window.SanSiteSettings.normalizeLab(value.lab),
       bodyColor: color('bodyColor'),
       chromeColor: color('chromeColor'),
       contactColor: color('contactColor'),
@@ -90,6 +92,7 @@
       contactTitle: plainText(value.contactTitle).trim().slice(0, limits.contactTitle) || defaults.contactTitle,
       contactAlign: choice('contactAlign', ['left','center','right','justify-left','justify-right']),
       contactUnderline: plainText(value.contactUnderline, defaults.contactUnderline).trim().slice(0, limits.contactTitle),
+      ...(Array.isArray(value.contactUnderlineRanges)?{contactUnderlineRanges:window.SanSiteSettings.textFormatting.trimRanges(plainText(value.contactTitle),value.contactUnderlineRanges)}:{}),
       instagram: safeSocialLink(value.instagram, defaults.instagram),
       behance: safeSocialLink(value.behance, defaults.behance),
       footerSignature: plainText(value.footerSignature, defaults.footerSignature).trim().slice(0, limits.footerSignature),
@@ -195,6 +198,7 @@
         lastName: plainText(value.about.lastName, 'SAN'),
         firstUnderline: plainText(value.about.firstUnderline, underlines.firstUnderline).slice(0, limits.underline),
         lastUnderline: plainText(value.about.lastUnderline, underlines.lastUnderline).slice(0, limits.underline),
+        ...Object.fromEntries(['first','last'].filter(part=>Array.isArray(value.about[part+'UnderlineRanges'])).map(part=>[part+'UnderlineRanges',window.SanSiteSettings.textFormatting.normalizeRanges(value.about[part+'UnderlineRanges'],plainText(value.about[part+'Text']).length)])),
         firstAlign: ['left','center','right','justify-left','justify-right'].includes(value.about.firstAlign) ? value.about.firstAlign : 'default',
         lastAlign: ['left','center','right','justify-left','justify-right'].includes(value.about.lastAlign) ? value.about.lastAlign : 'default',
         photo: {
